@@ -18,6 +18,11 @@ class DefaultController extends Controller
         5 => ["Вопрос 5" => "-----2234378  4378u h"]
     ];
 
+    public $contacts = [
+        "Иванов Иван" => "123-45-67",
+        "Петров Петр" => "3456-67-8",
+        "Сидоров Сидр" => "76-34-554"
+    ];
 
     /**
      * @Route("/")
@@ -43,7 +48,7 @@ class DefaultController extends Controller
      */
     public function contactsAction()
     {
-        return array();
+        return array("cont" => $this->contacts);
     }
 
     /**

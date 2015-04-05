@@ -3,8 +3,12 @@
 {% block content %}
     This is CONTACTS page<br/><br/>
 
-    contact1: aaa<br/>
-    contact2: bbb<br/>
+    {% for fam, tel in cont %}
+        <div style="margin-bottom: 10px;">
+            <b>{{ fam }}</b>: {{ tel }}<br/>
+        </div>
+    {% endfor %}
+
 {% endblock %}
 
 {% block m2 %}
