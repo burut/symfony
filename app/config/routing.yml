@@ -1,0 +1,8 @@
+burut_menu:
+    resource: "@BurutMenuBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
