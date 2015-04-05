@@ -8,8 +8,41 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class DefaultController extends Controller
 {
+    private $prod = [
+        "гречка" => "10",
+        "свечка" => "20",
+        "печка" => "30",
+        "хлеб" => "40",
+        "сало" => "50",
+        "мясо" => "60",
+        "колюаса" => "70",
+    ];
 
-    public $faqs = [
+    private $products = [
+        1 => [
+            "title" => "Гречка",
+            "price" => "10",
+            "img"   => "http://www.likar.info/pictures_ckfinder/images/grechka-po-kupecheski-retsept2.jpg"
+        ],
+        2 => [
+            "title" => "Свечка",
+            "price" => "20",
+            "img"   => "http://foto-ramki.com/predmety/clipart-svechki.png"
+        ],
+        4 => [
+            "title" => "Хлеб",
+            "price" => "40",
+            "img"   => "http://finansovoe-izobilie.ru/wp-content/uploads/hleb.jpg"
+        ],
+        7 => [
+            "title" => "Колбаса",
+            "price" => "70",
+            "img"   => "http://www.ua.all.biz/img/ua/catalog/98295.jpeg"
+        ]
+
+    ];
+
+    private $faqs = [
         0 => ["-" => "-"],
         1 => ["Вопрос номер 1" => "Ответ 1 ответ ответ орлырволв ывддловл"],
         2 => ["Вопрос 2" => "Ответ 2 kjhkjhf"],
@@ -18,7 +51,7 @@ class DefaultController extends Controller
         5 => ["Вопрос 5" => "-----2234378  4378u h"]
     ];
 
-    public $contacts = [
+    private $contacts = [
         "Иванов Иван" => "123-45-67",
         "Петров Петр" => "3456-67-8",
         "Сидоров Сидр" => "76-34-554"
@@ -84,5 +117,22 @@ class DefaultController extends Controller
         $answer = $faq[$question];
 
         return array("q" => $question, "a" => $answer, "id" => $id);
+    }
+
+    /**
+     * @Route("/products")
+     * @Template("BurutMenuBundle:Default:products.html.twig")
+     */
+    public function productsAction()
+    {
+        if (!isset($this->$pro[$id])) {
+            $id = 0;
+        }
+
+        $faq = $this->faqs[$id];
+        $question = key($faq);
+        $answer = $faq[$question];
+
+        return array("tit" => $titlte, ]);
     }
 }

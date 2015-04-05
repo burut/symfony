@@ -1,0 +1,18 @@
+{% extends "@BurutMenu/burut_layout.html.twig" %}
+
+{% block content %}
+    This is Products page<br/><br/>
+
+    {% for idprod, price in prod %}
+
+            <div>{{ id }}:   {{ price }} </div>
+
+    {% endfor %}
+
+{% endblock %}
+
+{% block m5 %}
+    <b>Products</b>
+{% endblock %}
+
+{% block title %}Products{% endblock %}
