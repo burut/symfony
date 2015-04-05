@@ -10,7 +10,7 @@ class DefaultController extends Controller
 {
 
     public $faqs = [
-        0 => ["---------------------" => "--------------------"],
+        0 => ["-" => "-"],
         1 => ["Вопрос номер 1" => "Ответ 1 ответ ответ орлырволв ывддловл"],
         2 => ["Вопрос 2" => "Ответ 2 kjhkjhf"],
         3 => ["Вопрос 3" => "qqqqqqqqqqqqqqqqqqqqqqqq qqq"],
