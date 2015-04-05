@@ -4,7 +4,7 @@
     This is FAQ page<br/><br/>
 
     {% for num, faq in faqs %}
-        {% for question, answer in faq %}
+        {% for question, answer in faq if num>0  %}
             <div style="color: red";><a href="/faq/{{ num }}">{{ question }}</a></div>
             <div style="margin: 0 0 10px 20px;">{{ answer }}</div>
         {% endfor %}
