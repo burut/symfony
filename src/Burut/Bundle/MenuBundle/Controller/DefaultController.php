@@ -125,14 +125,6 @@ class DefaultController extends Controller
      */
     public function productsAction()
     {
-        if (!isset($this->$pro[$id])) {
-            $id = 0;
-        }
-
-        $faq = $this->faqs[$id];
-        $question = key($faq);
-        $answer = $faq[$question];
-
-        return array("tit" => $titlte, ]);
+        return array("products" => $this->products);
     }
 }

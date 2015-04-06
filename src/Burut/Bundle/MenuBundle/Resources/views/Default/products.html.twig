@@ -3,9 +3,11 @@
 {% block content %}
     This is Products page<br/><br/>
 
-    {% for idprod, price in prod %}
+    {% for price in products %}
 
-            <div>{{ id }}:   {{ price }} </div>
+
+
+        <div> {{ products[price] }}:    </div>
 
     {% endfor %}
 
