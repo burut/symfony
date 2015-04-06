@@ -4,22 +4,22 @@
     This is Products page<br/><br/>
 
 
-    <table style="border-collapse:collapse; border:2px solid black;">
-        <tr>
+    <table style="text-align:center; border-collapse:collapse; border:2px solid black;">
+        <tr style="text-align: center;">
 
-            <th> id </th>
-            <th> картинка </th>
-            <th> название </th>
-            <th> цена </th>
+            <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> id </th>
+            <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> картинка </th>
+            <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> название </th>
+            <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> цена </th>
 
         </tr>
         {% for id, product in products %}
 
                 <tr>
-                    <td> {{ id }} </td>
-                    <td> <img width="50px" height="50px" src=" {{ product.img }} "> </td>
-                    <td> {{ product.title }} </td>
-                    <td> {{ product.price }} </td>
+                    <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ id }} </td>
+                    <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> <img width="50px" height="50px" src=" {{ product.img }} "> </td>
+                    <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ product.title }} </td>
+                    <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ product.price }} </td>
                 </tr>
 
         {% endfor %}
