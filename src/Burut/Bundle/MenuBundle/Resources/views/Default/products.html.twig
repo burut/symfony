@@ -3,15 +3,16 @@
 {% block content %}
     This is Products page<br/><br/>
 
-    {% for product in products %}
+    {% for id, product in products %}
 
-
-        <tr>
-            <td> img src=" {{ product.img }} " </td>
-            <td> {{ product.title }} </td>
-            <td> {{ product.price }} </td>
-        </tr>tr>
-
+        <table>
+            <tr>
+                <td> {{ id }} </td>
+                <td> <img width="50px" height="50px" src=" {{ product.img }} "> </td>
+                <td> {{ product.title }} </td>
+                <td> {{ product.price }} </td>
+            </tr>
+        </table>
     {% endfor %}
 
 {% endblock %}
