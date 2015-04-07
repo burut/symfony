@@ -139,7 +139,7 @@ class DefaultController extends Controller
     public function productAction($id)
     {
         if (!isset($this->products[$id])) {
-            $id = 0;
+            return array("id" => 0);
             }
         return array("product" => $this->products[$id], "id" => $id);
     }
