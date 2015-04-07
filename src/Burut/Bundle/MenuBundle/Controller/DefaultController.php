@@ -136,7 +136,7 @@ class DefaultController extends Controller
      * @Route("/product/{id}")
      * @Template("BurutMenuBundle:Default:product.html.twig")
      */
-    public function productAction()
+    public function productAction($id)
     {
         //if (!isset($this->products[$id])) {
          //   $id = 0;
@@ -146,7 +146,7 @@ class DefaultController extends Controller
         //$poz = key($product);
         //$price = key($price);
         //$img = key($img);
-        return array("product" => $this->$products[$id]);
+        return array("product" => $this->products[$id]);
         //, "title" => $title, "price" => $price, "img" => $img
 
 
