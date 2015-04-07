@@ -3,29 +3,32 @@
 {% block content %}
     This is Product page<br/><br/>
 
+    {% if tovar==0 %}
+        <div style="color: red;"><h1>Product not found!</h1></div>
+    {% else %}
 
-    <table style="text-align:center; border-collapse:collapse; border:2px solid black;">
-        <tr style="text-align: center;">
-            <td style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> id </td>
-            <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; max-width: 260px;"> {{ id }} </td>
-        </tr>
-        <tr style="text-align: center;">
-            <td style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> картинка </td>
-            <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ product.title }} </td>
-        <tr style="text-align: center;">
-            <td style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> название </td>
-            <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> <img width="50px" height="50px" src=" {{ product.img }} "> </td>
-        </tr>
-        <tr style="text-align: center;">
-            <td style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> цена </td>
-            <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ product.price }} </td>
-        </tr>
-        <tr style="text-align: center;">
-            <td style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> комент </td>
-            <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; max-width: 200px;"> {{ product.comments }} </td>
-        </tr>
-    </table>
-
+        <table style="text-align:center; border-collapse:collapse; border:2px solid black;">
+            <tr style="text-align: center;">
+                <td style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> id </td>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; max-width: 260px;"> {{ id }} </td>
+            </tr>
+            <tr style="text-align: center;">
+                <td style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> картинка </td>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ product.title }} </td>
+            <tr style="text-align: center;">
+                <td style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> название </td>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> <img width="50px" height="50px" src=" {{ product.img }} "> </td>
+            </tr>
+            <tr style="text-align: center;">
+                <td style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> цена </td>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ product.price }} </td>
+            </tr>
+            <tr style="text-align: center;">
+                <td style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> комент </td>
+                <td style="border-bottom:2px solid #000000; border-left:2px solid #000000; max-width: 200px;"> {{ product.comments }} </td>
+            </tr>
+        </table>
+    {% endif %}
 
 {% endblock %}
 
