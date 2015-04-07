@@ -146,7 +146,7 @@ class DefaultController extends Controller
         //$poz = key($product);
         //$price = key($price);
         //$img = key($img);
-        return array("product" => $this->products[$id]);
+        return array("product" => $this->products[$id], "id" => $id);
         //, "title" => $title, "price" => $price, "img" => $img
 
 
