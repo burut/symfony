@@ -138,12 +138,15 @@ class DefaultController extends Controller
      */
     public function productAction()
     {
-
+        //if (!isset($this->products[$id])) {
+         //   $id = 0;
+        //}
         //$id = $this->products;
-        //$title = key($title);
+        //$product = $this->products[$id];
+        //$poz = key($product);
         //$price = key($price);
         //$img = key($img);
-        return array("product" => $this->products);
+        return array("product" => $this->$products[$id]);
         //, "title" => $title, "price" => $price, "img" => $img
 
 
