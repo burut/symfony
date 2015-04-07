@@ -133,18 +133,19 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/product")
+     * @Route("/product/{id}")
      * @Template("BurutMenuBundle:Default:product.html.twig")
      */
     public function productAction()
     {
 
-        //$id = $this->products[$id];
+        //$id = $this->products;
         //$title = key($title);
         //$price = key($price);
         //$img = key($img);
-        //return array("id" => $id, "title" => $title, "price" => $price, "img" => $img);
-
         return array("product" => $this->products);
+        //, "title" => $title, "price" => $price, "img" => $img
+
+
     }
 }
