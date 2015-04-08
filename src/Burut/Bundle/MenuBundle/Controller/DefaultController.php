@@ -50,7 +50,7 @@ class DefaultController extends Controller
                 "position" => "студент прохладной жизни",
                 "age" => "33",
                 "photo"   => "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ2ZUs2fDu1wp3_AUhA8zXum9T2aUREZn8PwDYjQpQWqffvWEpZ",
-                "bio" => "жестяк!!!"
+                "bio" => "жестяк!!!!"
             ],
             2 => [
                 "name" => "skylabs",
