@@ -1,16 +1,5 @@
 class Product
 {
-protected $id;
-
-protected $name;
-
-protected $address;
-
-protected $phone;
-}
-
-class Product
-{
 /**
 * @ORM\Id
 * @ORM\Column(type="integer")
