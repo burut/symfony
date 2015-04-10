@@ -1,11 +1,35 @@
-// src/Burut/Bundle/MenuBundle/Entity/Client.php
-namespace Acme\StoreBundle\Entity;
+class Product
+{
+protected $id;
+
+protected $name;
+
+protected $address;
+
+protected $phone;
+}
 
 class Product
 {
+/**
+* @ORM\Id
+* @ORM\Column(type="integer")
+* @ORM\GeneratedValue(strategy="AUTO")
+*/
+protected $id;
+
+/**
+* @ORM\Column(type="string", length=100)
+*/
 protected $name;
 
-protected $price;
+/**
+* @ORM\Column(type="decimal", scale=2)
+*/
+protected $address;
 
-protected $description;
+/**
+* @ORM\Column(type="text")
+*/
+protected $phone;
 }
