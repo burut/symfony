@@ -7,30 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 
-use Burut\Bundle\MenuBundle\Entity\Client;
-use Symfony\Component\HttpFoundation\Response;
-
-/**
- * @Route("/create")
- */
-public function createAction()
-{
-    $client = new Client();
-    $client->setTitle('--');
-    $client->setAddress('--');
-    $client->setPhone('--');
-
-    $em = $this->getDoctrine()->getEntityManager();
-    $em->persist($client);
-    $em->flush();
-
-    return new Response('Created client id '.$client->getId());
-}
-
 class DefaultController extends Controller
-
-
-
 
 {
     private $prod = [
@@ -213,5 +190,25 @@ class DefaultController extends Controller
         return array("ourteam" => $this->ourteams[$id], "id" => $id);
     }
 
+    use Burut\Bundle\MenuBundle\Entity\Client;
+    use Symfony\Component\HttpFoundation\Response;
+
+    /**
+     * @Route("/create")
+     * return new Response('Created client id '.$client->getId());
+     */
+    public function createAction()
+    {
+        $client = new Client();
+        $client->setTitle('--');
+        $client->setAddress('--');
+        $client->setPhone('--');
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $em->persist($client);
+        $em->flush();
+
+        return new Response('Created client id '.$client->getId());
+    }
 
 }
