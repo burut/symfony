@@ -188,6 +188,24 @@ class DefaultController extends Controller
         return array("ourteam" => $this->ourteams[$id], "id" => $id);
     }
 
+    //src/Acme/StoreBundle/Controller/DefaultController.php
+    use Burut\Bundle\MenuBandle\Entity\Client;
+    use Symfony\Component\HttpFoundation\Response;
+// ...
 
+    public function createAction()
+    {
+        $client = new client();
+        $client->setID('--');
+        $client->setTitle('--');
+        $client->setAddress('--');
+        $client->setPhone('--');
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $em->persist($client);
+        $em->flush();
+
+        return new Response('Created client id '.$client->getId());
+    }
 
 }
