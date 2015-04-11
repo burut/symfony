@@ -6,10 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="product")
- * @IgnoreAnnotation("fn")
+ * @ORM\Table(name="Client")
  */
-class Product
+class Client
 
 
 {
