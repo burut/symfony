@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\Response;
 public function createAction()
 {
     $client = new Client();
-    $client->setID('--');
     $client->setTitle('--');
     $client->setAddress('--');
     $client->setPhone('--');
