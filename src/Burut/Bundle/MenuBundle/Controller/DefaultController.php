@@ -6,11 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-src/burut/StoreBundle/Controller/DefaultController.php
+
 use Burut\Bundle\MenuBundle\Entity\Client;
 use Symfony\Component\HttpFoundation\Response;
 
-
+/**
+ * @Route("/create")
+ */
 public function createAction()
 {
     $client = new Client();
