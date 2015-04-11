@@ -190,7 +190,7 @@ class DefaultController extends Controller
         return array("ourteam" => $this->ourteams[$id], "id" => $id);
     }
 
-    use Burut\Bundle\MenuBundle\Entity\Client;
+    //use Burut\Bundle\MenuBundle\Entity\Client;
     use Symfony\Component\HttpFoundation\Response;
 
     /**
