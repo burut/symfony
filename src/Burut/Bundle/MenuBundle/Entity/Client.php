@@ -1,14 +1,17 @@
 <?php
 
-namespace Acme\StoreBundle\Entity;
+namespace Burut\Bundle\MenuBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="product")
+ * @IgnoreAnnotation("fn")
  */
 class Product
+
+
 {
     /**
      * @ORM\Id
@@ -31,4 +34,8 @@ class Product
      * @ORM\Column(type="text")
      */
     protected $phone;
+
+
 }
+
+
