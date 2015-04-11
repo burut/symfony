@@ -5,7 +5,8 @@ namespace Burut\Bundle\MenuBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-
+use Burut\Bundle\MenuBundle\Entity\Client;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 
@@ -190,8 +191,7 @@ class DefaultController extends Controller
         return array("ourteam" => $this->ourteams[$id], "id" => $id);
     }
 
-    use Burut\Bundle\MenuBundle\Entity\Client;
-    use Symfony\Component\HttpFoundation\Response;
+
 
     /**
      * @Route("/create")
