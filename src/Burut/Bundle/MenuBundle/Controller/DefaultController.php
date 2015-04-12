@@ -194,7 +194,7 @@ class DefaultController extends Controller
 
 
     /**
-     * @Route("/create")
+     * @Route("/client/create")
      */
     public function createAction()
     {
