@@ -194,15 +194,15 @@ class DefaultController extends Controller
 
 
     /**
-     * @Route("/create")
+     * @Route("/client")
      * return new Response('Created client id '.$client->getId());
      */
     public function createAction()
     {
         $client = new Client();
-        $client->setTitle('--');
-        $client->setAddress('--');
-        $client->setPhone('--');
+        $client->setName(`kj`);
+        $client->setAddress(`lkhj`);
+        $client->setPhone(`kjsdfh`);
 
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($client);
