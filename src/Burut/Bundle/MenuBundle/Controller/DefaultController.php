@@ -18,7 +18,7 @@ class DefaultController extends Controller
         "хлеб" => "40",
         "сало" => "50",
         "мясо" => "60",
-        "колюаса" => "70",
+        "колбаса" => "70",
     ];
 
     private $products = [
@@ -194,15 +194,14 @@ class DefaultController extends Controller
 
 
     /**
-     * @Route("/client")
-     * return new Response('Created client id '.$client->getId());
+     * @Route("/create")
      */
     public function createAction()
     {
         $client = new Client();
-        $client->setName(`kj`);
-        $client->setAddress(`lkhj`);
-        $client->setPhone(`kjsdfh`);
+        $client->setTitle('--');
+        $client->setAddress('--');
+        $client->setPhone('--');
 
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($client);
