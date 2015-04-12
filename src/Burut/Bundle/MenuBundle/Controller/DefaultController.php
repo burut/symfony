@@ -199,7 +199,7 @@ class DefaultController extends Controller
     public function createAction()
     {
         $client = new Client();
-        $client->setTitle('--');
+        $client->setName('--');
         $client->setAddress('--');
         $client->setPhone('--');
 
