@@ -199,9 +199,9 @@ class DefaultController extends Controller
     public function createAction()
     {
         $client = new Client();
-        $client->setName('--');
-        $client->setAddress('--');
-        $client->setPhone('--');
+        $client->setName('petya');
+        $client->setAddress('gadyach');
+        $client->setPhone('38287234331');
 
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($client);
