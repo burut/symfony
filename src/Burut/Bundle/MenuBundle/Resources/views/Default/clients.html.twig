@@ -1,0 +1,35 @@
+{% extends "@BurutMenu/burut_layout.html.twig" %}
+
+{% block content %}
+    This is client page<br/><br/>
+
+
+    <table style="text-align:center; border-collapse:collapse; border:2px solid black;">
+        <tr style="text-align: center;">
+
+            <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> id </th>
+            <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> name </th>
+            <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> address </th>
+            <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> phone </th>
+
+        </tr>
+        {% for id, client in client %}
+
+           <tr>
+              <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ id }} </td>
+              <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ client.name }} </td>
+              <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ client.address }} </td>
+              <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ client.phone }} </td>
+           </tr>
+
+        {% endfor %}
+    </table>
+
+
+{% endblock %}
+
+{% block m7 %}
+    <b>client</b>
+{% endblock %}
+
+{% block title %}client{% endblock %}
