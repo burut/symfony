@@ -23,7 +23,7 @@ class Client
     protected $name;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="text", length=100)
      */
     protected $address;
 
