@@ -221,4 +221,14 @@ class DefaultController extends Controller
         return array("client" => $client);
 
     }
+
+    /**
+     * @Route("/client/delete/{id}")
+     */
+    public function cldelAction()
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $em->remove($this->clientsAction());
+        $em->flush();
+    }
 }
