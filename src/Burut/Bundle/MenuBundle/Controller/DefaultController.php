@@ -210,13 +210,15 @@ class DefaultController extends Controller
 
     /**
      * @Route("/clients")
+     * @Template("BurutMenuBundle:Default:clients.html.twig")
      */
     public function clientsAction()
     {
         $client = $this->getDoctrine()
-            ->getRepository('BurutBundleMenuBundleEntity:client')
+            ->getRepository('Burut\Bundle\MenuBundle\Entity\Client')
             ->findAll();
 
-        return array("client" => $this->$client);
+        return array("client" => $client);
+
     }
 }
