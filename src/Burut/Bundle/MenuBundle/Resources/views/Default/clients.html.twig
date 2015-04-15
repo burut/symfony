@@ -11,6 +11,7 @@
             <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> name </th>
             <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> address </th>
             <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> phone </th>
+            <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> delete </th>
 
         </tr>
         {% for id, client in client %}
@@ -20,6 +21,8 @@
               <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ client.name }} </td>
               <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ client.address }} </td>
               <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ client.phone }} </td>
+              <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> <a href="/client/delete/{{id}}">del pos</a></td>
+
            </tr>
 
         {% endfor %}
