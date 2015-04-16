@@ -234,7 +234,9 @@ class DefaultController extends Controller
             throw $this->createNotFoundException('No client found for id '.$id);
         }
 
-        $em->remove($client[$id]);
+        $em->remove($client);
         $em->flush();
+
+        return new Response('deleted client id ' . $client->getId());
     }
 }
