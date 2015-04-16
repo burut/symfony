@@ -225,10 +225,16 @@ class DefaultController extends Controller
     /**
      * @Route("/client/delete/{id}")
      */
-    public function cldelAction()
+    public function ClientDeleteAction($id)
     {
         $em = $this->getDoctrine()->getEntityManager();
-        $em->remove($this->clientsAction());
+        $client = $em->getRepository('Burut\Bundle\MenuBundle\Entity\Client')->find($id);
+
+        if (!$client) {
+            throw $this->createNotFoundException('No client found for id '.$id);
+        }
+
+        $em->remove($client[$id]);
         $em->flush();
     }
 }
