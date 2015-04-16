@@ -14,14 +14,14 @@
             <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> delete </th>
 
         </tr>
-        {% for id, client in client %}
+        {% for client in clients %}
 
            <tr>
-              <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ id }} </td>
+              <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ client.id }} </td>
               <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ client.name }} </td>
               <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ client.address }} </td>
               <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ client.phone }} </td>
-              <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> <a href="/client/delete/{{id}}">del pos</a></td>
+              <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> <a href="/client/delete/{{client.id}}">del pos</a></td>
 
            </tr>
 

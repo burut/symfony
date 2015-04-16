@@ -196,16 +196,16 @@ class DefaultController extends Controller
      */
     public function createAction()
     {
-        $client = new Client();
-        $client->setName('petya');
-        $client->setAddress('gadyach');
-        $client->setPhone('38287234331');
+        $clients = new Client();
+        $clients->setName('petya');
+        $clients->setAddress('gadyach');
+        $clients->setPhone('38287234331');
 
         $em = $this->getDoctrine()->getEntityManager();
-        $em->persist($client);
+        $em->persist($clients);
         $em->flush();
 
-        return new Response('Created client id ' . $client->getId());
+        return new Response('Created client id ' . $clients->getId());
     }
 
     /**
@@ -214,11 +214,12 @@ class DefaultController extends Controller
      */
     public function clientsAction()
     {
-        $client = $this->getDoctrine()
+        $clients = $this->getDoctrine()
             ->getRepository('Burut\Bundle\MenuBundle\Entity\Client')
             ->findAll();
 
-        return array("client" => $client);
+        return array("clients" => $clients
+        );
 
     }
 
@@ -228,15 +229,15 @@ class DefaultController extends Controller
     public function ClientDeleteAction($id)
     {
         $em = $this->getDoctrine()->getEntityManager();
-        $client = $em->getRepository('Burut\Bundle\MenuBundle\Entity\Client')->find($id);
+        $clients = $em->getRepository('Burut\Bundle\MenuBundle\Entity\Client')->find($id);
 
-        if (!$client) {
+        if (!$clients) {
             throw $this->createNotFoundException('No client found for id '.$id);
         }
 
-        $em->remove($client);
+        $em->remove($clients);
         $em->flush();
 
-        return new Response('deleted client id ' . $client->getId());
+        return new Response('deleted client id ' . $clients->getId());
     }
 }
