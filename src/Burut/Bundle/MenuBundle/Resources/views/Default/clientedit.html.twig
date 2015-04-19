@@ -1,7 +1,7 @@
 {% extends "@BurutMenu/burut_layout.html.twig" %}
 
 {% block content %}
-    This is client page<br/><br/>
+    This is client edit page<br/><br/>
 
 
     <table style="text-align:center; border-collapse:collapse; border:2px solid black;">
@@ -11,8 +11,6 @@
             <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> name </th>
             <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> address </th>
             <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> phone </th>
-            <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> delete </th>
-            <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> edit </th>
 
         </tr>
         {% for client in clients %}
@@ -22,9 +20,6 @@
               <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ client.name }} </td>
               <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ client.address }} </td>
               <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ client.phone }} </td>
-              <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> <a href="/client/delete/{{client.id}}">del pos</a></td>
-               <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> <a href="/clientedit/{{ client.id }}">edit client{{ client.id }}</a></td>
-
            </tr>
 
         {% endfor %}

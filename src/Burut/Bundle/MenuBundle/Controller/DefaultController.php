@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Burut\Bundle\MenuBundle\Entity\Client;
+use Burut\Bundle\MenuBundle\Entity\Task;
 use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
@@ -218,8 +219,7 @@ class DefaultController extends Controller
             ->getRepository('Burut\Bundle\MenuBundle\Entity\Client')
             ->findAll();
 
-        return array("clients" => $clients
-        );
+        return array("clients" => $clients);
 
     }
 
@@ -240,4 +240,18 @@ class DefaultController extends Controller
 
         return new Response('deleted client id ' . $clients->getId());
     }
+
+    /**
+     * @Route("/clientedit/{id}")
+     * @Template("BurutMenuBundle:Default:clientedit.html.twig")
+     */
+    public function clienteditAction($id)
+    {
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $clients = $em->getRepository('Burut\Bundle\MenuBundle\Entity\Client')->find($id);
+
+            return array("clients" => $clients);
+
+         }
 }
