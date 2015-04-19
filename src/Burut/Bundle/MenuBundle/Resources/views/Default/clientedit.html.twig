@@ -13,16 +13,28 @@
             <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> phone </th>
 
         </tr>
-        {% for client in clients %}
+
 
            <tr>
-              <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ client.id }} </td>
-              <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ client.name }} </td>
-              <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ client.address }} </td>
-              <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ client.phone }} </td>
+              <td style="border-bottom:2px solid white; border-left:2px solid white;">
+                  <form method="post">
+                    <input type="text" name = "a" id ="b"
+                           value="{{ client.id }}" ></form> </td>
+              <td style="border-bottom:2px solid white; border-left:2px solid white;">
+                  <form method="post">
+                      <input type="text" name = "a" id ="b"
+                             value="{{ client.name }}" ></form> </td>
+              <td style="border-bottom:2px solid white; border-left:2px solid white;">
+                  <form method="post">
+                      <input type="text" name = "a" id ="b"
+                             value="{{ client.address }}" ></form> </td>
+              <td style="border-bottom:2px solid white; border-left:2px solid white; border-right:2px solid white;">
+                  <form method="post">
+                      <input type="text" name = "a" id ="b"
+                             value="{{ client.phone }}" ></form> </td>
            </tr>
 
-        {% endfor %}
+
     </table>
 
 

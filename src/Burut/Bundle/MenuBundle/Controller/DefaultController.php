@@ -250,8 +250,8 @@ class DefaultController extends Controller
 
         $em = $this->getDoctrine()->getEntityManager();
         $clients = $em->getRepository('Burut\Bundle\MenuBundle\Entity\Client')->find($id);
-
-            return array("clients" => $clients);
+        var_dump($clients);
+            return array("client" => $clients);
 
          }
 }
