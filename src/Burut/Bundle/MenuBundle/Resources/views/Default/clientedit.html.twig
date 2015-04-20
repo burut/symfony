@@ -5,32 +5,36 @@
 
     <table>
         <tr>
-            <td style="width: 150px;">id </td>
+            <td style="width: 100px;">id </td>
             <td> {{ client.id }} </td>
         </tr>
         <tr>
             <td>name </td>
             <td>    <form method="post">
                     <input type="text" name = "a" id ="b"
-                    value="{{ client.name }}"></form>
+                    value="{{ client.name }}">
+                    <input type="submit" name="submit" id="save-field" value="save">
+                    <input type="submit" name="submit" id="cancel-field" value="cancel"></form>
             </td>
         </tr>
         <tr>
             <td>address </td>
             <td>    <form method="post">
                     <input type="text" name = "a" id ="b"
-                    value="{{ client.address }}" ></form>
+                    value="{{ client.address }}" >
+                    <input type="submit" name="submit" id="save-field" value="save">
+                    <input type="submit" name="submit" id="cancel-field" value="cancel"></form>
             </td>
         </tr>
         <tr>
             <td>phone </td>
             <td>    <form method="post">
                     <input type="text" name = "a" id ="b"
-                    value="{{ client.phone }}" > <input type="submit" value="save"> <input type="submit" value="cancel"></form>
+                    value="{{ client.phone }}">
+                    <input type="submit" name="submit" id="save-field" value="save">
+                    <input type="submit" name="submit" id="cancel-field" value="cancel"></form>
             </td>
         </tr>
-
-
     </table>
 
 
