@@ -245,7 +245,7 @@ class DefaultController extends Controller
      * @Route("/client/edit/{id}", name="_client_edit")
      * @Template("BurutMenuBundle:Default:client_edit.html.twig")
      */
-    public function clientEditAction($id)
+    public function clientEditAction($id, Request $request)
     {
 
         $em = $this->getDoctrine()->getEntityManager();
@@ -257,8 +257,8 @@ class DefaultController extends Controller
             ->add('phone', 'text')
             ->getForm();
 
-        if ($_REQUEST->getMethod() == 'POST') {
-            $form->bindRequest($_REQUEST);
+        if ($request->getMethod() == 'POST') {
+            $form->bindRequest($request);
 
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getEntityManager();
@@ -268,10 +268,11 @@ class DefaultController extends Controller
                 return $this->redirect($this->generateUrl('client_success'));
             }
 
+            return array(
+                "client" => $client,
+                "form" => $form->createView()
+            );
         }
-        return array(
-            "client" => $client,
-            "form" => $form->createView()
-        );
+
     }
 }
