@@ -23,7 +23,7 @@ class Task
     {
         return $this->address;
     }
-    public function setAddress()
+    public function setAddress($address)
     {
         $this->address = $address;
     }
@@ -32,7 +32,7 @@ class Task
     {
         return $this->phone;
     }
-    public function setPhone()
+    public function setPhone($phone)
     {
         $this->phone = $phone;
     }
