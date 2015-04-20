@@ -252,4 +252,21 @@ class DefaultController extends Controller
         $clients = $em->getRepository('Burut\Bundle\MenuBundle\Entity\Client')->find($id);
         return array("client" => $clients);
          }
+
+    public function newAction(Request $request)
+    {
+        // создаём задачу и присваиваем ей некоторые начальные данные для примера
+        $task = new Task();
+        $task->setTask('Write a blog post');
+        $task->setDueDate();
+
+        $form = $this->createFormBuilder($task)
+            ->add('task', 'text')
+            ->add('dueDate', 'date')
+            ->getForm();
+
+        return $this->render('AcmeTaskBundle:Default:new.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
 }
