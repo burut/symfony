@@ -210,10 +210,10 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/clients")
-     * @Template("BurutMenuBundle:Default:clients.html.twig")
+     * @Route("/client/list")
+     * @Template("BurutMenuBundle:Default:client_list.html.twig")
      */
-    public function clientsAction()
+    public function clientsListAction()
     {
         $clients = $this->getDoctrine()
             ->getRepository('Burut\Bundle\MenuBundle\Entity\Client')
@@ -226,7 +226,7 @@ class DefaultController extends Controller
     /**
      * @Route("/client/delete/{id}")
      */
-    public function ClientDeleteAction($id)
+    public function clientDeleteAction($id)
     {
         $em = $this->getDoctrine()->getEntityManager();
         $clients = $em->getRepository('Burut\Bundle\MenuBundle\Entity\Client')->find($id);
@@ -242,31 +242,27 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/clientedit/{id}")
-     * @Template("BurutMenuBundle:Default:clientedit.html.twig")
+     * @Route("/client/edit/{id}", name="_client_edit")
+     * @Template("BurutMenuBundle:Default:client_edit.html.twig")
      */
-    public function clienteditAction($id)
+    public function clientEditAction($id)
     {
 
         $em = $this->getDoctrine()->getEntityManager();
-        $clients = $em->getRepository('Burut\Bundle\MenuBundle\Entity\Client')->find($id);
-        return array("client" => $clients);
-         }
+        $client = $em->getRepository('Burut\Bundle\MenuBundle\Entity\Client')->find($id);
 
-    public function newAction(Request $request)
-    {
-        // создаём задачу и присваиваем ей некоторые начальные данные для примера
-        $task = new Task();
-        $task->setTask('Write a blog post');
-        $task->setDueDate();
-
-        $form = $this->createFormBuilder($task)
-            ->add('task', 'text')
-            ->add('dueDate', 'date')
+        $form = $this->createFormBuilder($client)
+            ->add('name', 'text')
+            ->add('address', 'text')
+            ->add("phone", "text")
             ->getForm();
 
-        return $this->render('AcmeTaskBundle:Default:new.html.twig', array(
-            'form' => $form->createView(),
-        ));
+
+
+        return array(
+            "client" => $client,
+            "form" => $form->createView()
+        );
     }
+
 }

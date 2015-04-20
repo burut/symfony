@@ -1,5 +1,4 @@
 <?php
-// src/Acme/TaskBundle/Entity/Task.php
 namespace Burut\Bundle\MenuBundle\Entity;
 
 class Task
