@@ -4,25 +4,36 @@ namespace Burut\Bundle\MenuBundle\Entity;
 
 class Task
 {
-    protected $task;
+    protected $name;
 
-    protected $dueDate;
+    protected $address;
 
-    public function getTask()
+    protected $phone;
+
+    public function getName()
     {
-        return $this->task;
+        return $this->name;
     }
-    public function setTask($task)
+    public function setName($name)
     {
-        $this->task = $task;
+        $this->name = $name;
     }
 
-    public function getDueDate()
+    public function getAddress()
     {
-        return $this->dueDate;
+        return $this->address;
     }
-    public function setDueDate(\DateTime $dueDate = null)
+    public function setAddress()
     {
-        $this->dueDate = $dueDate;
+        $this->address = $address;
+    }
+
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+    public function setPhone()
+    {
+        $this->phone = $phone;
     }
 }
