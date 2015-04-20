@@ -254,11 +254,11 @@ class DefaultController extends Controller
         $form = $this->createFormBuilder($client)
             ->add('name', 'text')
             ->add('address', 'text')
-            ->add("phone", "text")
+            ->add('phone', 'text')
             ->getForm();
 
-        if ($client->getMethod() == 'POST') {
-            $form->bindClient($client);
+        if ($_REQUEST->getMethod() == 'POST') {
+            $form->bindRequest($_REQUEST);
 
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getEntityManager();
@@ -268,12 +268,10 @@ class DefaultController extends Controller
                 return $this->redirect($this->generateUrl('client_success'));
             }
 
-
-            return array(
-                "client" => $client,
-                "form" => $form->createView()
-            );
         }
-
+        return array(
+            "client" => $client,
+            "form" => $form->createView()
+        );
     }
 }
