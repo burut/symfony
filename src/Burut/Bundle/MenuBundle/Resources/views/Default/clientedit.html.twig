@@ -4,38 +4,36 @@
     This is client edit page<br/><br/>
 
 
-    <table style="text-align:center; border-collapse:collapse; border:2px solid black;">
-        <tr style="text-align: center;">
 
-            <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> id </th>
-            <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> name </th>
-            <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> address </th>
-            <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> phone </th>
-
-        </tr>
-
-
-           <tr>
-              <td style="border-bottom:2px solid white; border-left:2px solid white;">
-                  <form method="post">
-                    <input type="text" name = "a" id ="b"
-                           value="{{ client.id }}" ></form> </td>
-              <td style="border-bottom:2px solid white; border-left:2px solid white;">
-                  <form method="post">
-                      <input type="text" name = "a" id ="b"
-                             value="{{ client.name }}" ></form> </td>
-              <td style="border-bottom:2px solid white; border-left:2px solid white;">
-                  <form method="post">
-                      <input type="text" name = "a" id ="b"
-                             value="{{ client.address }}" ></form> </td>
-              <td style="border-bottom:2px solid white; border-left:2px solid white; border-right:2px solid white;">
-                  <form method="post">
-                      <input type="text" name = "a" id ="b"
-                             value="{{ client.phone }}" > <input type="submit" value="Сохранить"> </form> </td>
-           </tr>
+    <div  style="width: 400px; display: inline-block;">
+        <div>
+            id            <br/>
+            name          <br/>
+            address       <br/>
+            phone         <br/>
+        </div>
 
 
-    </table>
+        <div style="text-align: right; position: fixed; top: -300px; ">
+            <form method="post">
+                <input type="text" name = "a" id ="b"
+                       value="{{ client.id }}" ></form> <br/>
+
+            <form method="post">
+                <input type="text" name = "a" id ="b"
+                       value="{{ client.name }}" ></form> <br/>
+
+            <form method="post">
+                <input type="text" name = "a" id ="b"
+                       value="{{ client.address }}" ></form> <br/>
+
+            <form method="post">
+                <input type="text" name = "a" id ="b"
+                       value="{{ client.phone }}" > <input type="submit" value="Сохранить"> </form>
+
+
+        </div>
+    </div>
 
 
 {% endblock %}
