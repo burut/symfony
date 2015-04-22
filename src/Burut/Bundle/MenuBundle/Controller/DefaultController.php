@@ -195,7 +195,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/client/create", name="_client_create")
+     * @Route("/client_create", name="_client_create")
      * @Template("BurutMenuBundle:Default:client_create.html.twig")
      */
     public function createAction()

@@ -1,7 +1,7 @@
 {% extends "@BurutMenu/burut_layout.html.twig" %}
 
 {% block content %}
-    This is client edit page<br/><br/>
+    This is client create page<br/><br/>
 
 
     <form action="{{ path('_client_create', {id: client.id}) }}" method="post" {{ form_enctype(form) }}>
