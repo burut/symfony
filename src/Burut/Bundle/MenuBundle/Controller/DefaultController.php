@@ -199,14 +199,14 @@ class DefaultController extends Controller
      */
     public function clientCreateAction()
     {
-        $clients = new Client();
-        $clients->setName("");
-        $clients->setAddress("");
-        $clients->setPhone("");
+        $client = new Client();
+        $client->setName("");
+        $client->setAddress("");
+        $client->setPhone("");
         $em = $this->getDoctrine()->getEntityManager();
-        $em->persist($clients);
+        $em->persist($client);
         $em->flush();
-        return $this->redirectToRoute('_client_edit', array('id'=>$clients->getId()));
+        return $this->redirectToRoute('_client_edit', array('id'=>$client->getId()));
     }
 
     /**
@@ -228,16 +228,16 @@ class DefaultController extends Controller
     public function clientDeleteAction($id)
     {
         $em = $this->getDoctrine()->getEntityManager();
-        $clients = $em->getRepository('Burut\Bundle\MenuBundle\Entity\Client')->find($id);
+        $client = $em->getRepository('Burut\Bundle\MenuBundle\Entity\Client')->find($id);
 
-        if (!$clients) {
+        if (!$client) {
             throw $this->createNotFoundException('No client found for id '.$id);
         }
 
-        $em->remove($clients);
+        $em->remove($client);
         $em->flush();
 
-        return new Response('deleted client id ' . $clients->getId());
+        return $this->redirectToRoute('_client_list');
     }
 
     /**
