@@ -206,7 +206,6 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($clients);
         $em->flush();
-        //return new Response('Created client id ' . $clients->getId());
         return $this->redirectToRoute('_client_edit', array('id'=>$clients->getId()));
     }
 
