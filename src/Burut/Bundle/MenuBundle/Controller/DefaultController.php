@@ -195,15 +195,12 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/client/create")
+     * @Route("/client/create", name="_client_create")
+     * @Template("BurutMenuBundle:Default:client_create.html.twig")
      */
     public function createAction()
     {
         $clients = new Client();
-        $clients->setName('petya');
-        $clients->setAddress('gadyach');
-        $clients->setPhone('38287234331');
-
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($clients);
         $em->flush();
