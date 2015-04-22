@@ -196,16 +196,18 @@ class DefaultController extends Controller
 
     /**
      * @Route("/client_create", name="_client_create")
-     * @Template("BurutMenuBundle:Default:client_create.html.twig")
      */
-    public function createAction()
+    public function clientCreateAction()
     {
         $clients = new Client();
+        $clients->setName("");
+        $clients->setAddress("");
+        $clients->setPhone("");
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($clients);
         $em->flush();
-
-        return new Response('Created client id ' . $clients->getId());
+        //return new Response('Created client id ' . $clients->getId());
+        return $this->redirectToRoute('_client_edit', array('id'=>$clients->getId()));
     }
 
     /**
@@ -217,7 +219,6 @@ class DefaultController extends Controller
         $clients = $this->getDoctrine()
             ->getRepository('Burut\Bundle\MenuBundle\Entity\Client')
             ->findAll();
-        var_dump($clients);
         return array("clients" => $clients);
 
     }
