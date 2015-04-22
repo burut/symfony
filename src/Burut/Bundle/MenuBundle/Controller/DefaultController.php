@@ -259,17 +259,16 @@ class DefaultController extends Controller
             ->add('phone', 'text')
             ->getForm();
 
-        if ($request->getMethod() == 'POST') {
-            $form->bindRequest($request);
-            var_dump($client);
+            $form->handleRequest($request);
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getEntityManager();
                 $em->persist($client);
                 $em->flush();
-                var_dump($request);
-                return $this->redirect($this->generateUrl('client_success'));
+
+
+                return $this->redirectToRoute('_client_list');
             }
-        }
+
             return array(
             "client" => $client,
             "form" => $form->createView()

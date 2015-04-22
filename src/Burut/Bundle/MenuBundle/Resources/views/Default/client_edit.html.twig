@@ -4,7 +4,7 @@
     This is client edit page<br/><br/>
 
 
-    <form action="{{ path('_client_list', {id: client.id}) }}" method="post" {{ form_enctype(form) }}>
+    <form action="{{ path('_client_edit', {id: client.id}) }}" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form) }}
 
         <input type="submit" />
