@@ -321,7 +321,7 @@ class DefaultController extends Controller
     public function siteEditAction($id, Request $request)
     {
         $em = $this->getDoctrine()->getEntityManager();
-        $site = $em->getRepository('Burut\Bundle\MenuBundle\Entity\Oursites')->find($id);
+        $site = $em->getRepository('BurutMenuBundle:Oursites')->find($id);
 
         $form = $this->createFormBuilder($site)
             ->add('title', 'text')
