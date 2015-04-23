@@ -272,7 +272,7 @@ class DefaultController extends Controller
      */
     public function siteCreateAction()
     {
-        $site = new Site();
+        $site = new Oursites();
         $site->setTitle("");
         $site->setUrl("");
         $site->setAuthor("");
@@ -285,7 +285,7 @@ class DefaultController extends Controller
 
     /**
      * @Route("/site/list", name="_our_site_list")
-     * @Template("BurutMenuBundle:Default:sites_list.html.twig")
+     * @Template("BurutMenuBundle:Default:our_site_list.html.twig")
      */
     public function siteListAction()
     {
