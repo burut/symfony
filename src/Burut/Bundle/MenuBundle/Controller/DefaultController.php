@@ -284,7 +284,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/site/list", name="_our_site_list")
+     * @Route("/site/list", name="_site_list")
      * @Template("BurutMenuBundle:Default:our_site_list.html.twig")
      */
     public function siteListAction()
@@ -321,13 +321,13 @@ class DefaultController extends Controller
     public function siteEditAction($id, Request $request)
     {
         $em = $this->getDoctrine()->getEntityManager();
-        $site = $em->getRepository('Burut\Bundle\MenuBundle\Entity\Oursite')->find($id);
+        $site = $em->getRepository('Burut\Bundle\MenuBundle\Entity\Oursites')->find($id);
 
         $form = $this->createFormBuilder($site)
-            ->add('title', 'string')
-            ->add('url', 'string')
-            ->add('author', 'string')
-            ->add('category', 'string')
+            ->add('title', 'text')
+            ->add('url', 'text')
+            ->add('author', 'text')
+            ->add('category', 'text')
             ->getForm();
         $form->handleRequest($request);
         if ($form->isValid()) {
