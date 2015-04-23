@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Burut\Bundle\MenuBundle\Entity\Client;
-use Burut\Bundle\MenuBundle\Entity\Task;
+use Burut\Bundle\MenuBundle\Entity\Oursites;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -246,7 +246,6 @@ class DefaultController extends Controller
      */
     public function clientEditAction($id, Request $request)
     {
-
         $em = $this->getDoctrine()->getEntityManager();
         $client = $em->getRepository('Burut\Bundle\MenuBundle\Entity\Client')->find($id);
 
@@ -255,21 +254,94 @@ class DefaultController extends Controller
             ->add('address', 'text')
             ->add('phone', 'text')
             ->getForm();
-
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getEntityManager();
                 $em->persist($client);
                 $em->flush();
-
-
                 return $this->redirectToRoute('_client_list');
             }
-
             return array(
             "client" => $client,
-            "form" => $form->createView()
-        );
+            "form" => $form->createView());
+    }
+        //////////////////////////////////////////////////////
+
+    /**
+     * @Route("/site_create", name="_site_create")
+     */
+    public function siteCreateAction()
+    {
+        $site = new Site();
+        $site->setTitle("");
+        $site->setUrl("");
+        $site->setAuthor("");
+        $site->setCategory("");
+        $em = $this->getDoctrine()->getEntityManager();
+        $em->persist($site);
+        $em->flush();
+        return $this->redirectToRoute('_site_edit', array('id'=>$site->getId()));
+    }
+
+    /**
+     * @Route("/site/list", name="_our_site_list")
+     * @Template("BurutMenuBundle:Default:sites_list.html.twig")
+     */
+    public function siteListAction()
+    {
+        $sites = $this->getDoctrine()
+            ->getRepository('Burut\Bundle\MenuBundle\Entity\Oursites')
+            ->findAll();
+        return array("sites" => $sites);
 
     }
+
+    /**
+     * @Route("/site/delete/{id}")
+     */
+    public function siteDeleteAction($id)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $site = $em->getRepository('Burut\Bundle\MenuBundle\Entity\Oursites')->find($id);
+
+        if (!$site) {
+            throw $this->createNotFoundException('No site found for id '.$id);
+        }
+
+        $em->remove($site);
+        $em->flush();
+
+        return $this->redirectToRoute('_site_list');
+    }
+
+    /**
+     * @Route("/site/edit/{id}", name="_site_edit")
+     * @Template("BurutMenuBundle:Default:our_sites_edit.html.twig")
+     */
+    public function siteEditAction($id, Request $request)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $site = $em->getRepository('Burut\Bundle\MenuBundle\Entity\Oursite')->find($id);
+
+        $form = $this->createFormBuilder($site)
+            ->add('title', 'string')
+            ->add('url', 'string')
+            ->add('author', 'string')
+            ->add('category', 'string')
+            ->getForm();
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($site);
+            $em->flush();
+            return $this->redirectToRoute('_site_list');
+        }
+        return array(
+            "site" => $site,
+            "form" => $form->createView());
+    }
+
+
+
+
 }
