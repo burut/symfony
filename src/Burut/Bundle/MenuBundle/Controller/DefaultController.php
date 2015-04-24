@@ -152,26 +152,26 @@ class DefaultController extends Controller
         return array("q" => $question, "a" => $answer, "id" => $id);
     }
 
-    /**
-     * @Route("/products")
-     * @Template("BurutMenuBundle:Default:products.html.twig")
-     */
-    public function productsAction()
-    {
-        return array("products" => $this->products);
-    }
-
-    /**
-     * @Route("/product/{id}")
-     * @Template("BurutMenuBundle:Default:product.html.twig")
-     */
-    public function productAction($id)
-    {
-        if (!isset($this->products[$id])) {
-            return array("id" => 0);
-        }
-        return array("product" => $this->products[$id], "id" => $id);
-    }
+               //             /**
+               //              * @Route("/products")
+               //              * @Template("BurutMenuBundle:Default:products.html.twig")
+               //              */
+               //             public function productsAction()
+               //             {
+               //                 return array("products" => $this->products);
+               //                 }
+               //
+               //             /**
+               //              * @Route("/product/{id}")
+               //              * @Template("BurutMenuBundle:Default:product.html.twig")
+               //              */
+               //             public function productAction($id)
+               //             {
+               //                 if (!isset($this->products[$id])) {
+               //                     return array("id" => 0);
+               //                 }
+               //                 return array("product" => $this->products[$id], "id" => $id);
+               //             }
 
     /**
      * @Route("/ourteams")
@@ -292,6 +292,10 @@ class DefaultController extends Controller
         $sites = $this->getDoctrine()
             ->getRepository('Burut\Bundle\MenuBundle\Entity\Oursites')
             ->findAll();
+
+      //  if (!count($sites)) {
+            // add from array
+        //}
         return array("sites" => $sites);
 
     }
@@ -341,6 +345,96 @@ class DefaultController extends Controller
             "form" => $form->createView());
     }
 
+    // - загоняем в базу product
+
+    /**
+     * @Route("/product_create", name="_product_create")
+     */
+    public function productCreateAction()
+    {
+        $product = newProduct();
+        $product->setTitle("");
+        $product->setPrice("");
+        $product->setImg("");
+        $product->setComments("");
+        $em = $this->getDoctrine()->getEntityManager();
+        $em->persist($product);
+        $em->flush();
+        return $this->redirectToRoute('_site_edit', array('id'=>$product->getId()));
+    }
+
+    /**
+     * @Route("/products/list", name="_product_list")
+     * @Template("BurutMenuBundle:Default:products.html.twig")
+     */
+    public function productListAction()
+    {
+        $products = $this->getDoctrine()
+            ->getRepository('Burut\Bundle\MenuBundle\Entity\Product')
+            ->findAll();
+         if (!count($products))
+         {
+             foreach ($this->products as $prod) {
+
+                 $product = newProduct();
+                 $product->setTitle($prod["title"]);
+                 $product->setPrice($prod["price"]);
+                 $product->setImg($prod["img"]);
+                 $product->setComments($prod["comments"]);
+                 $em = $this->getDoctrine()->getEntityManager();
+                 $em->persist($product);
+                 $em->flush();
+             }
+
+
+         }
+            return array("products" => $products);
+    }
+
+    /**
+     * @Route("/product/delete/{id}")
+     */
+    public function productDeleteAction($id)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $product = $em->getRepository('Burut\Bundle\MenuBundle\Entity\Product')->find($id);
+
+        if (!$product) {
+            throw $this->createNotFoundException('No product found for id '.$id);
+        }
+
+        $em->remove($product);
+        $em->flush();
+
+        return $this->redirectToRoute('_product_list');
+    }
+
+    /**
+     * @Route("/product/edit/{id}", name="_product_edit")
+     * @Template("BurutMenuBundle:Default:product_edit.html.twig")
+     */
+    public function productEditAction($id, Request $request)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $product = $em->getRepository('BurutMenuBundle:Product')->find($id);
+
+        $form = $this->createFormBuilder($product)
+            ->add('title', 'text')
+            ->add('url', 'text')
+            ->add('author', 'text')
+            ->add('category', 'text')
+            ->getForm();
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($product);
+            $em->flush();
+            return $this->redirectToRoute('_product_list');
+        }
+        return array(
+            "site" => $product,
+            "form" => $form->createView());
+    }
 
 
 
