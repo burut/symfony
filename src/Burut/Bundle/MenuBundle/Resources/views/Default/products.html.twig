@@ -7,22 +7,22 @@
     <table style="text-align:center; border-collapse:collapse; border:2px solid black;">
         <tr style="text-align: center;">
 
-            <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;">id</th>
-            <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;">картинка</th>
-            <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;">название</th>
-            <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;">цена</th>
-            <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;">  </th>
+            <th class="td1">id</th>
+            <th class="td1">картинка</th>
+            <th class="td1">название</th>
+            <th class="td1">цена</th>
+            <th class="td1">  </th>
 
 
         </tr>
         {% for product in products %}
 
                 <tr>
-                    <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ product.id }} </td>
-                    <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> <img width="50px" height="50px" src=" {{ product.img }} "> </td>
-                    <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ product.title }} </td>
-                    <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ product.price }} </td>
-                    <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> <a href="/product/{{ id }}"> Подробнее.. </a> </td>
+                    <td class="prod2"> {{ product.id }} </td>
+                    <td class="prod2"> <img width="50px" height="50px" src=" {{ product.img }} "> </td>
+                    <td class="prod2"> {{ product.title }} </td>
+                    <td class="prod2"> {{ product.price }} </td>
+                    <td class="prod2"> <a href="/product/{{ product.id }}"> Подробнее.. </a> </td>
                 </tr>
 
         {% endfor %}
