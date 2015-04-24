@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Burut\Bundle\MenuBundle\Entity\Client;
 use Burut\Bundle\MenuBundle\Entity\Oursites;
+use Burut\Bundle\MenuBundle\Entity\Product;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -352,7 +353,7 @@ class DefaultController extends Controller
      */
     public function productCreateAction()
     {
-        $product = newProduct();
+        $product = new Product();
         $product->setTitle("");
         $product->setPrice("");
         $product->setImg("");
@@ -376,7 +377,7 @@ class DefaultController extends Controller
          {
              foreach ($this->products as $prod) {
 
-                 $product = newProduct();
+                 $product = new Product();
                  $product->setTitle($prod["title"]);
                  $product->setPrice($prod["price"]);
                  $product->setImg($prod["img"]);
