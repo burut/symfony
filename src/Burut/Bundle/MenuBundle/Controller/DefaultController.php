@@ -428,7 +428,7 @@ class DefaultController extends Controller
             return $this->redirectToRoute('_product_list');
         }
         return array(
-            "site" => $product,
+            "product" => $product,
             "form" => $form->createView());
     }
 
