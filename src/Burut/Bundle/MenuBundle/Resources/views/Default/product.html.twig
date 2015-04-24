@@ -3,14 +3,14 @@
 {% block content %}
     This is Product page<br/><br/>
 
-    {% if product.id==0 %}
+    {% if id==0 %}
         <div style="color: red;"><h1>Product not found!</h1></div>
     {% else %}
 
         <table style="text-align:center; border-collapse:collapse; border:2px solid black;">
             <tr style="text-align: center;">
                 <td class="td1"> id </td>
-                <td class="td2"> {{ product.id }} </td>
+                <td class="td2"> {{ id }} </td>
             </tr>
             <tr style="text-align: center;">
                 <td class="td1"> картинка </td>

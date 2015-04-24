@@ -266,7 +266,6 @@ class DefaultController extends Controller
             "client" => $client,
             "form" => $form->createView());
     }
-        //////////////////////////////////////////////////////
 
     /**
      * @Route("/site_create", name="_site_create")
@@ -293,10 +292,6 @@ class DefaultController extends Controller
         $sites = $this->getDoctrine()
             ->getRepository('Burut\Bundle\MenuBundle\Entity\Oursites')
             ->findAll();
-
-      //  if (!count($sites)) {
-            // add from array
-        //}
         return array("sites" => $sites);
 
     }
@@ -437,6 +432,20 @@ class DefaultController extends Controller
             "form" => $form->createView());
     }
 
+                /**
+                  * @Route("/product/{id}")
+                  * @Template("BurutMenuBundle:Default:product.html.twig")
+                  */
+                 public function productAction($id)
+                 {
+                     $em = $this->getDoctrine()->getEntityManager();
+                     $product = $em->getRepository('Burut\Bundle\MenuBundle\Entity\Product')->find($id);
+
+                     if (!isset($this->products[$id])) {
+                         return array("id" => 0);
+                     }
+                     return array("product" => $product, "id" => $id);
+                 }
 
 
 }
