@@ -38,13 +38,13 @@ class DefaultController extends Controller
             "img" => "http://foto-ramki.com/predmety/clipart-svechki.png",
             "comments" => "Герой романа «Свечка» Евгений Золоторотов — ветеринарный врач, московский интеллигент, прекрасный сын, муж и отец"
         ],
-        4 => [
+        3 => [
             "title" => "Хлеб",
             "price" => "40",
             "img" => "http://finansovoe-izobilie.ru/wp-content/uploads/hleb.jpg",
             "comments" => "Хлеб — пищевой продукт, получаемый путём выпечки, паровой обработки или жарки теста, состоящего, как минимум, из муки и воды"
         ],
-        7 => [
+        4 => [
             "title" => "Колбаса",
             "price" => "70",
             "img" => "http://www.ua.all.biz/img/ua/catalog/98295.jpeg",
@@ -370,9 +370,10 @@ class DefaultController extends Controller
             ->findAll();
          if (!count($products))
          {
-             foreach ($this->products as $prod) {
-
+             foreach ($this->products as $prod)
+             {
                  $product = new Product();
+                 //$this->products->setId($prod["id"]);
                  $product->setTitle($prod["title"]);
                  $product->setPrice($prod["price"]);
                  $product->setImg($prod["img"]);
@@ -380,9 +381,9 @@ class DefaultController extends Controller
                  $em = $this->getDoctrine()->getEntityManager();
                  $em->persist($product);
                  $em->flush();
+                 $products = $this->prod;
+                 var_dump($product);
              }
-
-
          }
             return array("products" => $products);
     }
