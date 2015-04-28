@@ -373,7 +373,7 @@ class DefaultController extends Controller
              foreach ($this->products as $prod)
              {
                  $product = new Product();
-                 //$this->products->setId($prod["id"]);
+
                  $product->setTitle($prod["title"]);
                  $product->setPrice($prod["price"]);
                  $product->setImg($prod["img"]);
@@ -381,8 +381,8 @@ class DefaultController extends Controller
                  $em = $this->getDoctrine()->getEntityManager();
                  $em->persist($product);
                  $em->flush();
-                 $products = $this->prod;
-                 var_dump($product);
+                 $products[] = $product;
+
              }
          }
             return array("products" => $products);
