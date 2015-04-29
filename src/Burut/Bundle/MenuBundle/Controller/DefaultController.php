@@ -6,9 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Burut\Bundle\MenuBundle\Entity\Client;
+use Burut\Bundle\MenuBundle\Entity\Ourteams;
 use Burut\Bundle\MenuBundle\Entity\Oursites;
 use Burut\Bundle\MenuBundle\Entity\Product;
-use Burut\Bundle\MenuBundle\Entity\Ourteams;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -182,14 +182,13 @@ class DefaultController extends Controller
     public function ourteamAction()
     {
         $ourteams = $this->getDoctrine()
-            ->getRepository('Burut\Bundle\MenuBundle\Entity\ourteams')
+            ->getRepository('Burut\Bundle\MenuBundle\Entity\Ourteams')
             ->findAll();
         if (!count($ourteams))
         {
             foreach ($this->ourteam as $ourteam)
             {
-                $ourteams = new Product();
-
+                $ourteams = new Ourteams();
                 $ourteams->setName($ourteam["name"]);
                 $ourteams->setPosition($ourteam["position"]);
                 $ourteams->setAge($ourteam["age"]);

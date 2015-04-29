@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="Ourteams)
+ * @ORM\Table(name="Ourteams")
  */
 class Ourteams
 {
@@ -36,7 +36,7 @@ class Ourteams
     /**
      * @var string
      *
-     * @ORM\Column(name="age", type="string", length=50)
+     * @ORM\Column(name="age", type="text")
      */
     private $age;
 
@@ -50,7 +50,9 @@ class Ourteams
     /**
      * @var string
      *
-     * @ORM\Column(name="bio", type="string", length=255)
+     * @ORM\Column(name="bio", type="text")
+     *
+     * null table=true
      */
     private $bio;
 
@@ -94,7 +96,7 @@ class Ourteams
      * @param string $position
      * @return Ourteams
      */
-    public function setPrice($position)
+    public function setPosition($position)
     {
         $this->position = $position;
 
