@@ -55,10 +55,10 @@ class DefaultController extends Controller
     private $ourteam = [
         1 => [
             "name" => "burut",
-            "position" => "студент прохладной жизни",
+            "position" => "студент прохладной жизни, нифига не выходит!",
             "age" => "33",
             "photo" => "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ2ZUs2fDu1wp3_AUhA8zXum9T2aUREZn8PwDYjQpQWqffvWEpZ",
-            "bio" => "жестяк!!!!"
+            "bio" => "вывапмиdfsvgevbgжестяк!!!!"
         ],
         2 => [
             "name" => "skylabs",
@@ -184,21 +184,21 @@ class DefaultController extends Controller
         $ourteam = $this->getDoctrine()
             ->getRepository('Burut\Bundle\MenuBundle\Entity\Ourteams')
             ->findAll();
-        if (!count($ourteam)){
-            foreach ($this->ourteam as $row){
-                $member = new Ourteams();
-                $member->setName($row["name"]);
-                $member->setPosition($row["position"]);
-                $member->setAge($row["age"]);
-                $member->setPhoto($row["photo"]);
-                var_dump($member);
-                $member->setBio($row["bio"]);
-                $em = $this->getDoctrine()->getEntityManager();
-                $em->persist($member);
-                $em->flush();
-                $ourteam[] = $member;
-            }
-        }
+                if (!count($ourteam)){
+                    foreach ($this->ourteam as $row){
+                        $member = new Ourteams();
+                        $member->setName($row["name"]);
+                        $member->setPosition($row["position"]);
+                        $member->setAge($row["age"]);
+                        $member->setPhoto($row["photo"]);
+                        $member->setBio($row["bio"]);
+                        var_dump($member);
+                        $em = $this->getDoctrine()->getEntityManager();
+                        $em->persist($member);
+                        $em->flush();
+                        $ourteam[] = $member;
+                    }
+                }
         return array("ourteam" => $ourteam);
     }
 
@@ -208,10 +208,14 @@ class DefaultController extends Controller
      */
     public function ourteamsAction($id)
     {
-        if (!isset($this->ourteams[$id])) {
-            return array("id" => 0);
+        $em = $this->getDoctrine()->getEntityManager();
+        $ourteam = $em->getRepository('Burut\Bundle\MenuBundle\Entity\Ourteams')->find($id);
+
+        if (!$ourteam) {
+            throw $this->createNotFoundException('No member found for id '.$id);
         }
-        return array("ourteam" => $this->ourteams[$id], "id" => $id);
+
+        return array("ourteam" => $ourteam);
     }
 
     /**

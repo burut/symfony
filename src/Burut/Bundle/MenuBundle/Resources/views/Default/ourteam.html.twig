@@ -3,14 +3,10 @@
 {% block content %}
     This is Our Team page<br/><br/>
 
-    {% if id==0 %}
-        <div style="color: red;"><h1>Not Found!</h1></div>
-    {% else %}
-
         <table style="text-align:center; border-collapse:collapse; border:2px solid black;">
             <tr style="text-align: center;">
                 <td class="td1"> id </td>
-                <td class="td2"> {{ id }} </td>
+                <td class="td2"> {{ ourteam.id }} </td>
             </tr>
             <tr style="text-align: center;">
                 <td class="td1"> name </td>
@@ -32,7 +28,6 @@
                 <td class="td2"> {{ ourteam.bio }} </td>
             </tr>
         </table>
-    {% endif %}
 
 {% endblock %}
 

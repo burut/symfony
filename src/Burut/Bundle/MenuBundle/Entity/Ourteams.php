@@ -165,7 +165,7 @@ class Ourteams
      */
     public function setBio($bio)
     {
-        $this->photo = $bio;
+        $this->bio = $bio;
 
         return $this;
     }
