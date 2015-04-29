@@ -5,10 +5,8 @@ namespace Burut\Bundle\MenuBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Product
- *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(name="Ourteams")
  */
 class Ourteams
 {
@@ -104,6 +102,29 @@ class Ourteams
     }
 
     /**
+     * Get position
+     *
+     * @return string 
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * Set age
+     *
+     * @param string $age
+     * @return Ourteams
+     */
+    public function setAge($age)
+    {
+        $this->age = $age;
+
+        return $this;
+    }
+
+    /**
      * Get age
      *
      * @return string 
@@ -114,48 +135,48 @@ class Ourteams
     }
 
     /**
-     * Set img
+     * Set photo
      *
-     * @param string $img
+     * @param string $photo
      * @return Ourteams
      */
-    public function setImg($img)
+    public function setPhoto($photo)
     {
-        $this->img = $img;
+        $this->photo = $photo;
 
         return $this;
     }
 
     /**
-     * Get img
+     * Get photo
      *
-     * @return string 
+     * @return string
      */
-    public function getImg()
+    public function getPhoto()
     {
-        return $this->img;
+        return $this->photo;
     }
 
     /**
-     * Set comments
+     * Set bio
      *
-     * @param string $comments
+     * @param string $bio
      * @return Ourteams
      */
-    public function setComments($comments)
+    public function setBio($bio)
     {
-        $this->comments = $comments;
+        $this->photo = $bio;
 
         return $this;
     }
 
     /**
-     * Get comments
+     * Get bio
      *
-     * @return string 
+     * @return string
      */
-    public function getComments()
+    public function getBio()
     {
-        return $this->comments;
+        return $this->bio;
     }
 }

@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Burut\Bundle\MenuBundle\Entity\Client;
 use Burut\Bundle\MenuBundle\Entity\Oursites;
 use Burut\Bundle\MenuBundle\Entity\Product;
+use Burut\Bundle\MenuBundle\Entity\Ourteams;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -51,7 +52,7 @@ class DefaultController extends Controller
             "comments" => "В детстве, бабушка в селе колбасу делала сама. Эта домашняя колбаса давно стала частью семейной традиции."
         ]
     ];
-    private $ourteams = [
+    private $ourteam = [
         1 => [
             "name" => "burut",
             "position" => "студент прохладной жизни",
@@ -180,7 +181,28 @@ class DefaultController extends Controller
      */
     public function ourteamAction()
     {
-        return array("ourteam" => $this->ourteams);
+        $ourteams = $this->getDoctrine()
+            ->getRepository('Burut\Bundle\MenuBundle\Entity\ourteams')
+            ->findAll();
+        if (!count($ourteams))
+        {
+            foreach ($this->ourteam as $ourteam)
+            {
+                $ourteams = new Product();
+
+                $ourteams->setName($ourteam["name"]);
+                $ourteams->setPosition($ourteam["position"]);
+                $ourteams->setAge($ourteam["age"]);
+                $ourteams->setPhoto($ourteam["photo"]);
+                $ourteams->setBio($ourteam["bio"]);
+                $em = $this->getDoctrine()->getEntityManager();
+                $em->persist($ourteams);
+                $em->flush();
+                $ourteams[] = $ourteam;
+
+            }
+        }
+        return array("ourteam" => $ourteams);
     }
 
     /**
