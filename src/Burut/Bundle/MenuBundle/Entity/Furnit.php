@@ -38,7 +38,7 @@ class Furnit
     /**
      * @var string
      *
-     * @ORM\Column(name="price", type="decimal")
+     * @ORM\Column(name="price", type="decimal", scale=2)
      */
     private $price;
 
