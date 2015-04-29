@@ -51,8 +51,6 @@ class Ourteams
      * @var string
      *
      * @ORM\Column(name="bio", type="text")
-     *
-     * null table=true
      */
     private $bio;
 
