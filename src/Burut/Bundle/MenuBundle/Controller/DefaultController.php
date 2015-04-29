@@ -9,6 +9,7 @@ use Burut\Bundle\MenuBundle\Entity\Client;
 use Burut\Bundle\MenuBundle\Entity\Ourteams;
 use Burut\Bundle\MenuBundle\Entity\Oursites;
 use Burut\Bundle\MenuBundle\Entity\Product;
+use Burut\Bundle\MenuBundle\Entity\Furnit;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -24,6 +25,25 @@ class DefaultController extends Controller
         "сало" => "50",
         "мясо" => "60",
         "колбаса" => "70",
+    ];
+
+    private $furn = [
+
+        1 => [
+            "art" => "123",
+            "nazv" => "kjywe",
+            "price" => "35",
+        ],
+        2 => [
+            "art" => "345",
+            "nazv" => "kjlhewywe",
+            "price" => "27",
+        ],
+        3 => [
+            "art" => "43636",
+            "nazv" => "kjywpo26e",
+            "price" => "908",
+        ]
     ];
 
     private $products = [
@@ -466,4 +486,93 @@ class DefaultController extends Controller
         $product = $em->getRepository('Burut\Bundle\MenuBundle\Entity\Product')->find($id);
         return array("product" => $product);
         }
+        ////////// furn
+    /**
+     * @Route("/furn_create", name="_furn_create")
+     */
+    public function furnCreateAction()
+    {
+        $furn = new Furnit();
+        $furn->setArt("");
+        $furn->setNazv("");
+        $furn->setPrice("");
+        $em = $this->getDoctrine()->getEntityManager();
+        $em->persist($furn);
+        $em->flush();
+        return $this->redirectToRoute('_furn_edit', array('id'=>$furn->getId()));
+    }
+
+    /**
+     * @Route("/furn/list", name="_furn_list")
+     * @Template("BurutMenuBundle:Default:furn_list.html.twig")
+     */
+    public function furnListAction()
+    {
+        $furnit = $this->getDoctrine()
+            ->getRepository('Burut\Bundle\MenuBundle\Entity\Furnit')
+            ->findAll();
+        if (!count($furnit))
+        {
+            foreach ($this->furn as $row)
+            {
+                $poz = new Furnit();
+
+                $poz->setArt($row["art"]);
+                $poz->setNazv($row["nazv"]);
+                $poz->setPrice($row["price"]);
+                $em = $this->getDoctrine()->getEntityManager();
+                $em->persist($poz);
+                $em->flush();
+                $furnit[] = $poz;
+
+            }
+        }
+        return array("furn" => $furnit);
+
+    }
+
+    /**
+     * @Route("/furn/delete/{id}")
+     */
+    public function furnDeleteAction($id)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $furn = $em->getRepository('Burut\Bundle\MenuBundle\Entity\Furnit')->find($id);
+
+        if (!$furn) {
+            throw $this->createNotFoundException('No furniture found for id '.$id);
+        }
+
+        $em->remove($furn);
+        $em->flush();
+
+        return $this->redirectToRoute('_furn_list');
+    }
+
+    /**
+     * @Route("/furn/edit/{id}", name="_furn_edit")
+     * @Template("BurutMenuBundle:Default:furn_edit.html.twig")
+     */
+    public function furnEditAction($id, Request $request)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $furn = $em->getRepository('BurutMenuBundle:Furnit')->find($id);
+
+        $form = $this->createFormBuilder($furn)
+            ->add('art', 'text')
+            ->add('nazv', 'text')
+            ->add('price', 'text')
+            ->getForm();
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($furn);
+            $em->flush();
+            return $this->redirectToRoute('_furn_list');
+        }
+        return array(
+            "furn" => $furn,
+            "form" => $form->createView());
+    }
+
 }
