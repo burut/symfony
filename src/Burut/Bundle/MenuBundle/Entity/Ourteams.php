@@ -5,8 +5,8 @@ namespace Burut\Bundle\MenuBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table()
- * @ORM\Entity(name="Ourteams")
+ * @ORM\Entity
+ * @ORM\Table(name="Ourteams)
  */
 class Ourteams
 {
