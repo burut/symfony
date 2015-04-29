@@ -181,27 +181,25 @@ class DefaultController extends Controller
      */
     public function ourteamAction()
     {
-        $ourteams = $this->getDoctrine()
+        $ourteam = $this->getDoctrine()
             ->getRepository('Burut\Bundle\MenuBundle\Entity\Ourteams')
             ->findAll();
-        if (!count($ourteams))
-        {
-            foreach ($this->ourteam as $ourteam)
-            {
-                $ourteams = new Ourteams();
-                $ourteams->setName($ourteam["name"]);
-                $ourteams->setPosition($ourteam["position"]);
-                $ourteams->setAge($ourteam["age"]);
-                $ourteams->setPhoto($ourteam["photo"]);
-                $ourteams->setBio($ourteam["bio"]);
+        if (!count($ourteam)){
+            foreach ($this->ourteam as $row){
+                $member = new Ourteams();
+                $member->setName($row["name"]);
+                $member->setPosition($row["position"]);
+                $member->setAge($row["age"]);
+                $member->setPhoto($row["photo"]);
+                var_dump($member);
+                $member->setBio($row["bio"]);
                 $em = $this->getDoctrine()->getEntityManager();
-                $em->persist($ourteams);
+                $em->persist($member);
                 $em->flush();
-                $ourteams[] = $ourteam;
-
+                $ourteam[] = $member;
             }
         }
-        return array("ourteam" => $ourteams);
+        return array("ourteam" => $ourteam);
     }
 
     /**
