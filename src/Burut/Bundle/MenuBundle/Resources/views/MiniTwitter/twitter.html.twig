@@ -1,0 +1,48 @@
+{% extends "@BurutMenu/burut_layout.html.twig" %}
+
+{% block content %}
+    This Mini Twitter page<br/><br/>
+
+
+
+    <form action="{{ path('_twit_create') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+
+        <input type="submit" />
+    </form>
+
+    <table style="text-align:center; border-collapse:collapse; border:2px solid black;">
+        <tr style="text-align: center;">
+
+            <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> id </th>
+            <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> art </th>
+            <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> nazv </th>
+            <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> price </th>
+            <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"></th>
+            <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"></th>
+
+        </tr>
+        {% for twit in twits %}
+
+           <tr>
+              <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ twit.id }} </td>
+              <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ twit.createdAt }} </td>
+              <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ twit.name }} </td>
+              <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ twit.message }} </td>
+              <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ twit.image }} </td>
+
+           </tr>
+
+        {% endfor %}
+
+    </table>
+
+
+
+
+{% endblock %}
+
+{% block m10 %}
+    <b>Мини твитер</b>{% endblock %}
+
+{% block title %}Mini Twitter{% endblock %}

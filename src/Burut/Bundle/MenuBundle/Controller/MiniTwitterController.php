@@ -13,32 +13,60 @@ use Symfony\Component\HttpFoundation\Request;
 class MiniTwitterController extends Controller
 
 {
-    private $products = [
-        1 => [
-            "title" => "Гречка",
-            "price" => "10",
-            "img" => "http://www.likar.info/pictures_ckfinder/images/grechka-po-kupecheski-retsept2.jpg",
-            "comments" => "Гречка – отличная замена мясу, благодаря хорошо растворимым и усваиваемым белкам, а также калорийности и приятному вкусу."
-        ],
-        2 => [
-            "title" => "Свечка",
-            "price" => "20",
-            "img" => "http://foto-ramki.com/predmety/clipart-svechki.png",
-            "comments" => "Герой романа «Свечка» Евгений Золоторотов — ветеринарный врач, московский интеллигент, прекрасный сын, муж и отец"
-        ],
-        3 => [
-            "title" => "Хлеб",
-            "price" => "40",
-            "img" => "http://finansovoe-izobilie.ru/wp-content/uploads/hleb.jpg",
-            "comments" => "Хлеб — пищевой продукт, получаемый путём выпечки, паровой обработки или жарки теста, состоящего, как минимум, из муки и воды"
-        ],
-        4 => [
-            "title" => "Колбаса",
-            "price" => "70",
-            "img" => "http://www.ua.all.biz/img/ua/catalog/98295.jpeg",
-            "comments" => "В детстве, бабушка в селе колбасу делала сама. Эта домашняя колбаса давно стала частью семейной традиции."
-        ]
-];
+    /**
+     * @Route("/twit_create", name="_twit_create")
+     */
+    public function productCreateAction()
+    {
+        $twit = new Twit();
+        $twit->setCreatedAt("");
+        $twit->setName("");
+        $twit->setMessage("");
+        $twit->setImage("");
+        $em = $this->getDoctrine()->getEntityManager();
+        $em->persist($twit);
+        $em->flush();
+        var_dump($twit);
+        return $this->redirectToRoute('_twit_edit', array('id'=>$twit->getId()));
+    }
 
+    /**
+     * @Route("/twit/edit", name="_twit_edit")
+     * @Template("BurutMenuBundle:MiniTwitter:twit.html.twig")
+     */
+    public function twitEditAction($id, Request $request)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $twit = $em->getRepository('BurutMenuBundle:Twit')->find($id);
+
+        $form = $this->createFormBuilder($twit)
+            ->add('name', 'text')
+            ->add('message', 'text')
+            ->add('image', 'text')
+            ->getForm();
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($twit);
+            $em->flush();
+            return $this->redirectToRoute('_twitter');
+        }
+        var_dump($form);
+        return array(
+            "twits" => $twit,
+            "form" => $form->createView());
+    }
+
+    /**
+     * @Route("/twitter", name="_twitter")
+     * @Template("BurutMenuBundle:MiniTwitter:twitter.html.twig")
+     */
+    public function twitAction()
+    {
+        $twits = $this->getDoctrine()
+            ->getRepository('Burut\Bundle\MenuBundle\Entity\Twit')
+            ->findAll();
+        return array("twits" => $twits);
+    }
 
 }

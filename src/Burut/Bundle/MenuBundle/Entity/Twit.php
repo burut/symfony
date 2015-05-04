@@ -45,7 +45,7 @@ class Twit
     /**
      * @var string
      *
-     * @ORM\Column(name="image", type="string", length=255, nullable)
+     * @ORM\Column(name="image", type="string", length=255)
      */
     private $image;
 
