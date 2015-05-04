@@ -36,8 +36,13 @@ class MiniTwitterController extends Controller
      */
     public function twitEditAction($id, Request $request)
     {
-        $em = $this->getDoctrine()->getEntityManager();
-        $twit = $em->getRepository('BurutMenuBundle:Twit')->find($id);
+
+        $twit = $this->getDoctrine()
+            ->getRepository('Burut\Bundle\MenuBundle\Entity\Twit')
+            ->find($id);
+
+       // $em = $this->getDoctrine()->getEntityManager();
+       // $twit = $em->getRepository('BurutMenuBundle:Twit')->find($id);
 
         $form = $this->createFormBuilder($twit)
             ->add('name', 'text')
@@ -45,16 +50,23 @@ class MiniTwitterController extends Controller
             ->add('image', 'text')
             ->getForm();
         $form->handleRequest($request);
+        var_damp($twit, $form);
+
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($twit);
             $em->flush();
-            return $this->redirectToRoute('_twitter');
+            var_damp($twit, $form);
+            return array(
+                "twit" => $twit,
+                "form" => $form->createView()
+            );
         }
-        var_dump($form);
-        return array(
-            "twits" => $twit,
-            "form" => $form->createView());
+        var_damp($twit, $form);
+            return array(
+            "twit" => $twit,
+            "form" => $form->createView()
+            );
     }
 
     /**
@@ -66,7 +78,8 @@ class MiniTwitterController extends Controller
         $twits = $this->getDoctrine()
             ->getRepository('Burut\Bundle\MenuBundle\Entity\Twit')
             ->findAll();
-        return array("twits" => $twits);
+        return array("twits" => $twits,
+            );
     }
 
 }
