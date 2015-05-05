@@ -26,8 +26,8 @@
 
            <tr>
               <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ twit.id }} </td>
-              <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ twit.createdAt }} </td>
-              <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ twit.name }} </td>
+              <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ twit.createdAt | date("D, d M Y H:i:s") }} </td>
+              <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ twit.name | lower }} </td>
               <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ twit.message }} </td>
               <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ twit.image }} </td>
 

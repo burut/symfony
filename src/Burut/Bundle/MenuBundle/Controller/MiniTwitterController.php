@@ -31,18 +31,41 @@ class MiniTwitterController extends Controller
     }
 
     /**
-     * @Route("/twit/edit", name="_twit_edit")
-     * @Template("BurutMenuBundle:MiniTwitter:twit.html.twig")
+     * @Route("/twitter", name="_twit_edit")
+     * @Template("BurutMenuBundle:MiniTwitter:twitter.html.twig")
      */
-    public function twitEditAction($id, Request $request)
+//    public function twitEditAction(Request $request)
+//    {
+//
+//        $twit = $this->getDoctrine()
+//            ->getRepository('Burut\Bundle\MenuBundle\Entity\Twit')
+//            ->findAll();
+//
+//       // $em = $this->getDoctrine()->getEntityManager();
+//       // $twit = $em->getRepository('BurutMenuBundle:Twit')->find($id);
+//
+//        $form = $this->createFormBuilder($twit)
+//            ->add('name', 'text')
+//            ->add('message', 'text')
+//            ->add('image', 'text')
+//            ->getForm();
+//        $form->handleRequest($request);
+//
+//        if ($form->isValid()) {
+//            $em = $this->getDoctrine()->getEntityManager();
+//            $em->persist($twit);
+//            $em->flush();
+//            var_dump($twit, $form);
+//        }
+//        return array(
+//            "twits" => $twit,
+//            "form" => $form->createView()
+//            );
+//    }
+
+    public function twitterAction(Request $request)
     {
-
-        $twit = $this->getDoctrine()
-            ->getRepository('Burut\Bundle\MenuBundle\Entity\Twit')
-            ->find($id);
-
-       // $em = $this->getDoctrine()->getEntityManager();
-       // $twit = $em->getRepository('BurutMenuBundle:Twit')->find($id);
+        $twit = new Twit();
 
         $form = $this->createFormBuilder($twit)
             ->add('name', 'text')
@@ -50,36 +73,39 @@ class MiniTwitterController extends Controller
             ->add('image', 'text')
             ->getForm();
         $form->handleRequest($request);
-        var_damp($twit, $form);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
+            $twit->setCreatedAt(new \DateTime());
             $em->persist($twit);
             $em->flush();
-            var_damp($twit, $form);
-            return array(
-                "twit" => $twit,
-                "form" => $form->createView()
-            );
         }
-        var_damp($twit, $form);
-            return array(
-            "twit" => $twit,
-            "form" => $form->createView()
-            );
-    }
 
-    /**
-     * @Route("/twitter", name="_twitter")
-     * @Template("BurutMenuBundle:MiniTwitter:twitter.html.twig")
-     */
-    public function twitAction()
-    {
         $twits = $this->getDoctrine()
             ->getRepository('Burut\Bundle\MenuBundle\Entity\Twit')
-            ->findAll();
-        return array("twits" => $twits,
+            ->findBy(
+                array(),
+                array('created_at' => 'DESC')
             );
+
+        return array(
+            "twits" => $twits,
+            "form" => $form->createView()
+        );
     }
+
+
+//    /**
+//     * @Route("/twitter", name="_twitter")
+//     * @Template("BurutMenuBundle:MiniTwitter:twitter.html.twig")
+//     */
+//    public function twitAction()
+//    {
+//        $twits = $this->getDoctrine()
+//            ->getRepository('Burut\Bundle\MenuBundle\Entity\Twit')
+//            ->findAll();
+//        return array("twits" => $twits,
+//            );
+//    }
 
 }
