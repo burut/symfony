@@ -44,16 +44,16 @@ class MiniTwitterController extends Controller
             ->getForm();
         $form->handleRequest($request);
 
-//        if ($form->getImage->isValid()) {
-//            $twit->setImage('true');
-//        }
+        if (!$form->isValid()) {
+            $twit->setImage("");
+        }
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
             $twit->setCreatedAt(new \DateTime());
             $em->persist($twit);
             $em->flush();
-            $twit->setMessage("");
-            $twit->setImage("");
+//            $twit->setMessage("");
+//            $twit->setImage("");
             }
 
         $twits = $this->getDoctrine()
