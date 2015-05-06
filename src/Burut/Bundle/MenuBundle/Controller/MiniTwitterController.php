@@ -42,8 +42,6 @@ class MiniTwitterController extends Controller
             ->add('message', 'text')
             ->add('image', 'text')
             ->getForm();
-        $twit->setMessage("");
-        $twit->setImage("");
         $form->handleRequest($request);
 
 //        if ($form->getImage->isValid()) {
@@ -54,6 +52,8 @@ class MiniTwitterController extends Controller
             $twit->setCreatedAt(new \DateTime());
             $em->persist($twit);
             $em->flush();
+            $twit->setMessage("");
+            $twit->setImage("");
             }
 
         $twits = $this->getDoctrine()
