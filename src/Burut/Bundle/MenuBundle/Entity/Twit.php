@@ -38,7 +38,7 @@ class Twit
     /**
      * @var string
      *
-     * @ORM\Column(name="message", type="string", length=200)
+     * @ORM\Column(name="message", type="text", length=200)
      */
     private $message;
 

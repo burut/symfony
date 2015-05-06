@@ -34,59 +34,36 @@ class MiniTwitterController extends Controller
      * @Route("/twitter", name="_twit_edit")
      * @Template("BurutMenuBundle:MiniTwitter:twitter.html.twig")
      */
-//    public function twitEditAction(Request $request)
-//    {
-//
-//        $twit = $this->getDoctrine()
-//            ->getRepository('Burut\Bundle\MenuBundle\Entity\Twit')
-//            ->findAll();
-//
-//       // $em = $this->getDoctrine()->getEntityManager();
-//       // $twit = $em->getRepository('BurutMenuBundle:Twit')->find($id);
-//
-//        $form = $this->createFormBuilder($twit)
-//            ->add('name', 'text')
-//            ->add('message', 'text')
-//            ->add('image', 'text')
-//            ->getForm();
-//        $form->handleRequest($request);
-//
-//        if ($form->isValid()) {
-//            $em = $this->getDoctrine()->getEntityManager();
-//            $em->persist($twit);
-//            $em->flush();
-//            var_dump($twit, $form);
-//        }
-//        return array(
-//            "twits" => $twit,
-//            "form" => $form->createView()
-//            );
-//    }
-
     public function twitterAction(Request $request)
     {
         $twit = new Twit();
-
         $form = $this->createFormBuilder($twit)
             ->add('name', 'text')
             ->add('message', 'text')
             ->add('image', 'text')
             ->getForm();
+        $twit->setMessage("");
+        $twit->setImage("");
         $form->handleRequest($request);
 
+//        if ($form->getImage->isValid()) {
+//            $twit->setImage('true');
+//        }
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
             $twit->setCreatedAt(new \DateTime());
             $em->persist($twit);
             $em->flush();
-        }
+            }
 
         $twits = $this->getDoctrine()
             ->getRepository('Burut\Bundle\MenuBundle\Entity\Twit')
             ->findBy(
                 array(),
-                array('created_at' => 'DESC')
+                array('createdAt' => 'DESC')
             );
+
+
 
         return array(
             "twits" => $twits,
