@@ -1,5 +1,27 @@
 {% extends "@BurutMenu/burut_layout.html.twig" %}
 
+{% block js %}
+    <script>
+        $(function() {
+            $("#refresh").click(function() {
+                $("#tweets table, #tweets th, #tweets td").css("border-color", "#ddd");
+                $("#tweets").css("color", "#ddd");
+
+                $.get( "/twitter_feed", function( data ) {
+
+                    setTimeout(function() {
+                        $("#tweets").html(data);
+                        $("#tweets table, #tweets th, #tweets td").css("border-color", "#000");
+                        $("#tweets").css("color", "#000");
+                    }, 1000);
+
+                });
+            });
+        });
+    </script>
+{% endblock %}
+
+
 {% block content %}
     This Mini Twitter page<br/><br/>
 
@@ -8,9 +30,12 @@
 
         <input type="submit" value="Tweet"/>
     </form>
-    <br/> <a href="{{ path("_twit_edit") }}"> <input type="submit" value="Refresh"/></a>
 
-    {% include '@BurutMenu/MiniTwitter/table.html.twig' %}
+    <div id="refresh"> Refresh </div>
+
+    <div id="tweets">
+        {% include '@BurutMenu/MiniTwitter/table.html.twig' %}
+    </div>
 
 {% endblock %}
 

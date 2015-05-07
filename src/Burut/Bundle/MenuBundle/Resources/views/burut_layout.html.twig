@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-    {% block title %}Main page{% endblock %}
+        {% block title %}Main page{% endblock %}
+        <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+        {% block js %}{% endblock %}
     </head>
     <body>
     <H1><a href="/">My site</a></H1>
@@ -45,5 +47,13 @@
 
         .prod2{border-bottom:2px solid #000000;
             border-left:2px solid #000000;}
+
+        #refresh {
+            font-weight: bold; margin: 10px 0;
+            background-color: #aaa; width: 80px;
+            border-radius: 5px; text-align: center;
+            padding: 5px 0; cursor: pointer;
+        }
+
     </style>
 </html>

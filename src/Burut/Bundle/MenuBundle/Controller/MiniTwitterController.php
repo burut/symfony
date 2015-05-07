@@ -79,17 +79,22 @@ class MiniTwitterController extends Controller
     }
 
 
-//    /**
-//     * @Route("/twitter", name="_twitter")
-//     * @Template("BurutMenuBundle:MiniTwitter:twitter.html.twig")
-//     */
-//    public function twitAction()
-//    {
-//        $twits = $this->getDoctrine()
-//            ->getRepository('Burut\Bundle\MenuBundle\Entity\Twit')
-//            ->findAll();
-//        return array("twits" => $twits,
-//            );
-//    }
+    /**
+     * @Route("/twitter_feed", name="_twitter_feed")
+     * @Template("BurutMenuBundle:MiniTwitter:table.html.twig")
+     */
+    public function twitterFeedAction(Request $request)
+    {
+        $twits = $this->getDoctrine()
+            ->getRepository('Burut\Bundle\MenuBundle\Entity\Twit')
+            ->findBy(
+                array(),
+                array('createdAt' => 'DESC')
+            );
+
+        return array(
+            "twits" => $twits,
+        );
+    }
 
 }
