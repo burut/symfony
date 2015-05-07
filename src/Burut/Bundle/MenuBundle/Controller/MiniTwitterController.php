@@ -61,7 +61,6 @@ class MiniTwitterController extends Controller
                 ->add('message', 'text')
                 ->add('image', 'text')
                 ->getForm();
-//            $form->handleRequest($request);
         }
 
         $twits = $this->getDoctrine()

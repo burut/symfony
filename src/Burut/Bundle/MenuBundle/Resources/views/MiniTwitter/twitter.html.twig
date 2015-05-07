@@ -10,23 +10,7 @@
     </form>
     <br/> <a href="{{ path("_twit_edit") }}"> <input type="submit" value="Refresh"/></a>
 
-    <table style="text-align:center; border-collapse:collapse; border:2px solid black;">
-        <tr style="text-align: center;">
-            <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> art </th>
-            <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> nazv </th>
-            <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> price </th>
-            <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"></th>
-            <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"></th>
-        </tr>
-        {% for twit in twits %}
-           <tr>
-              <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ twit.createdAt | date("D, d M Y H:i:s") }} </td>
-              <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ twit.name | upper }} </td>
-              <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ twit.message }} </td>
-              <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ twit.image }} </td>
-           </tr>
-        {% endfor %}
-    </table>
+    {% include '@BurutMenu/MiniTwitter/table.html.twig' %}
 
 {% endblock %}
 
