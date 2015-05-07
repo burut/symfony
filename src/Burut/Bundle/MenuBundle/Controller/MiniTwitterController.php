@@ -52,9 +52,17 @@ class MiniTwitterController extends Controller
             $twit->setCreatedAt(new \DateTime());
             $em->persist($twit);
             $em->flush();
-//            $twit->setMessage("");
-//            $twit->setImage("");
-            }
+
+            $twit = new Twit();
+            $name = $form->get("name")->getData();
+            $twit->setName($name);
+            $form = $this->createFormBuilder($twit)
+                ->add('name', 'text')
+                ->add('message', 'text')
+                ->add('image', 'text')
+                ->getForm();
+//            $form->handleRequest($request);
+        }
 
         $twits = $this->getDoctrine()
             ->getRepository('Burut\Bundle\MenuBundle\Entity\Twit')
