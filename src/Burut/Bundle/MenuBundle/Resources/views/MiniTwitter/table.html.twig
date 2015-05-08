@@ -1,18 +1,11 @@
 
-    <table style="text-align:center; border-collapse:collapse; border:2px solid black;">
-        <tr style="text-align: center;">
-            <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> art </th>
-            <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> nazv </th>
-            <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"> price </th>
-            <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"></th>
-            <th style="padding-left:25px; padding-right:25px; border-bottom:2px solid #000000; border-left:2px solid #000000;"></th>
-        </tr>
+
         {% for twit in twits %}
-           <tr>
-              <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ twit.createdAt | date("D, d M Y H:i:s") }} </td>
-              <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ twit.name | upper }} </td>
-              <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ twit.message }} </td>
-              <td style="border-bottom:2px solid #000000; border-left:2px solid #000000;"> {{ twit.image }} </td>
-           </tr>
+           <div class="tweet">
+              <div class="createdAt">{{ twit.createdAt | date("Y-m-d H:i:s") }}</div>
+              <div class="name">{{ twit.name | upper }}, писал/а:</div><br/><br/>
+              <div class="i1 image"><img width="50px" height="50px" src=" {{ twit.image }} "></div>
+               <div class="i1 message">{{ twit.message }}</div>
+           </div>
         {% endfor %}
-    </table>
+

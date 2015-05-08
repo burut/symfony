@@ -25,13 +25,13 @@
 {% block content %}
     This Mini Twitter page<br/><br/>
 
-    <form action="{{ path('_twit_edit') }}" method="post" {{ form_enctype(form) }}>
-        {{ form_widget(form) }}
 
-        <input type="submit" value="Tweet"/>
-    </form>
+        <form id="form" action="{{ path('_twit_edit') }}" method="post" {{ form_enctype(form) }}>
+            {{ form_widget(form) }}
+            <input type="submit" value="Tweet"/>
+        </form>
 
-    <div id="refresh"> Refresh </div>
+        <div id="refresh"> Refresh </div>
 
     <div id="tweets">
         {% include '@BurutMenu/MiniTwitter/table.html.twig' %}
