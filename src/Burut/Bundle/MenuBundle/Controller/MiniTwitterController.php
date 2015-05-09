@@ -27,7 +27,7 @@ class MiniTwitterController extends Controller
         $em->persist($twit);
         $em->flush();
         var_dump($twit);
-        return $this->redirectToRoute('_twit_edit', array('id'=>$twit->getId()));
+        return $this->redirectToRoute('_twit_edit', array($twit->getId()));
     }
 
     /**
@@ -55,7 +55,7 @@ class MiniTwitterController extends Controller
             $twit->setCreatedAt(new \DateTime());
             $em->persist($twit);
             $em->flush();
-
+            return $this->redirectToRoute('_twit_create');
             $twit = new Twit();
             $name = $form->get("name")->getData();
             $twit->setName($name);
