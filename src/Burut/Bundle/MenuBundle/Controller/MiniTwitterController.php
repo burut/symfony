@@ -34,9 +34,9 @@ class MiniTwitterController extends Controller
      * @Route("/twitter", name="_twit_edit")
      * @Template("BurutMenuBundle:MiniTwitter:twitter.html.twig")
      */
-    public function twitterAction(Request $request, $name)
+    public function twitterAction($name=null, Request $request)
     {
-        $form['name'] = "null";
+
         $twit = new Twit();
         $twit->setName($name);
         $form = $this->createFormBuilder($twit)
@@ -58,7 +58,8 @@ class MiniTwitterController extends Controller
             $twit->setCreatedAt(new \DateTime());
             $em->persist($twit);
             $em->flush();
-            return $this->redirectToRoute('_twit_edit', array($name=>$form->get("name")));
+
+            return $this->redirectToRoute('_twit_edit', ['name' => $form->get("name")]);
             $twit = new Twit();
             $name = $form->get("name")->getData();
             $twit->setName($name);
