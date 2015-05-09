@@ -44,7 +44,7 @@ class MiniTwitterController extends Controller
             ->getForm();
         $form->handleRequest($request);
 
-        if (!$form->isValid()) {
+        if ($form->isValid()) {
             $twit->setImage("");
         }
         if ($form->isValid()) {

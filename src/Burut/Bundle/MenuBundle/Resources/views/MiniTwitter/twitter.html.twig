@@ -26,6 +26,31 @@
     This Mini Twitter page<br/><br/>
 
     <div id="formfixed">
+        <form action="{{ path('_twit_edit') }}" method="post" {{ form_enctype(form) }}>
+            {{ form_errors(form) }}
+            <div>
+                {{ form_label(form.name) }}
+                {{ form_errors(form.name) }}
+                {{ form_widget(form.name) }}
+            </div>
+
+            <div class="form_message">
+                {{ form_label(form.message) }}
+                {{ form_errors(form.message) }}
+                {{ form_widget(form.message) }}
+            </div>
+
+            <div>
+                {{ form_label(form.image) }}
+                {{ form_errors(form.image) }}
+                {{ form_widget(form.image) }}
+            </div>
+
+            {{ form_rest(form) }}
+
+            <input type="submit" value="Tweet"/>
+        </form>
+
         {#<form action="{{ path('_twit_edit') }}" method="post" {{ form_enctype(form) }}>#}
             {#{{ form_widget(form) }}#}
             {#<input type="submit" value="Tweet"/>#}
@@ -33,30 +58,6 @@
             <div id="refresh"> Refresh </div>
     </div>
 
-    <form action="{{ path('_twit_edit') }}" method="post" {{ form_enctype(form) }}>
-        {{ form_errors(form) }}
-        <div>
-            {{ form_label(form.name) }}
-            {{ form_errors(form.name) }}
-            {{ form_widget(form.name) }}
-        </div>
-
-        <div>
-            {{ form_label(form.message) }}
-            {{ form_errors(form.message) }}
-            {{ form_widget(form.message) }}
-        </div>
-
-        <div>
-            {{ form_label(form.image) }}
-            {{ form_errors(form.image) }}
-            {{ form_widget(form.image) }}
-        </div>
-
-        {{ form_rest(form) }}
-
-        <input type="submit" />
-    </form>
 
     <div id="tweets">
         {% include '@BurutMenu/MiniTwitter/table.html.twig' %}
