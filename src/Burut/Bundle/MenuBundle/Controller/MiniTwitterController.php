@@ -44,9 +44,12 @@ class MiniTwitterController extends Controller
             ->getForm();
         $form->handleRequest($request);
 
-        if (!$form->isValid()) {
-            $twit->setImage("");
-        }
+        $twit->setMessage("");
+        $twit->setImage("");
+
+//        if (!$form->isValid()) {
+//            $twit->setImage("");
+//        }
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
             $twit->setCreatedAt(new \DateTime());
@@ -74,6 +77,8 @@ class MiniTwitterController extends Controller
             "twits" => $twits,
             "form" => $form->createView()
         );
+
+
     }
 
 
