@@ -60,7 +60,7 @@
         }
 
         #tweets{
-            border: solid darkblue 2px;
+            border: solid dimgray 2px;
             background-color: #aaa;
             position: absolute;
             left: 260px;
@@ -69,15 +69,14 @@
 
         #form{
             position: fixed;
-            background:gray;
-            color:white;
-            left:10px;top:200px;
+            left:10px; top:200px;
+            min-height: 200px;
         }
 
         .tweet{
-            border: solid #000000 3px;
+            border: solid dimgray 3px;
             border-radius: 10px;
-            background-color: #ddffdd;
+            background-color: #f9ecec;
             padding: 10px;
             margin: 3px;
         }
@@ -85,6 +84,7 @@
         .createdAt{
             width: 180px;
             display: inline-block;
+            font-size: 12px;
         }
 
         .name{
@@ -98,11 +98,15 @@
         }
 
         .image{
-            width: 180px;
+            width: 80px;
+            height: 80px;
+            border-radius: 7px;
+            border: solid #000000 2px;
         }
 
         .message{
             max-width: 400px;
+            padding-left: 100px;
         }
     </style>
 </html>
