@@ -70,8 +70,6 @@ class MiniTwitterController extends Controller
                 array('createdAt' => 'DESC')
             );
 
-
-
         return array(
             "twits" => $twits,
             "form" => $form->createView()
