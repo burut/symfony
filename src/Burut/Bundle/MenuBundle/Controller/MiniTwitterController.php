@@ -59,7 +59,7 @@ class MiniTwitterController extends Controller
             $form = $this->createFormBuilder($twit)
                 ->add('name', 'text')
                 ->add('message', 'text')
-                ->add('image', 'text')
+                ->add('image', 'text', ['required' => false])
                 ->getForm();
         }
 
