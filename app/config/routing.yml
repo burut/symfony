@@ -1,3 +1,7 @@
+app_joboard:
+    resource: "@AppJoboardBundle/Resources/config/routing.yml"
+    prefix:   /
+
 burut_menu:
     resource: "@BurutMenuBundle/Controller/"
     type:     annotation

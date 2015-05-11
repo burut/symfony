@@ -113,7 +113,7 @@ class DefaultController extends Controller
     ];
 
     /**
-     * @Route("/")
+     * @Route("/site")
      * @Template("BurutMenuBundle:Default:index.html.twig")
      */
     public function indexAction()
