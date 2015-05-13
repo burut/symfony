@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new Burut\Bundle\MenuBundle\BurutMenuBundle(),
             new App\JoboardBundle\AppJoboardBundle(),
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
