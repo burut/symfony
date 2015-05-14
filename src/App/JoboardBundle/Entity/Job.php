@@ -3,6 +3,8 @@
 namespace App\JoboardBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\JoboardBundle\Utils\Joboard as Joborad;
+
 
 /**
  * Job
@@ -387,11 +389,12 @@ class Job
      * @param \DateTime $expiresAt
      * @return Job
      */
-    public function setExpiresAt($expiresAt)
+    public function setExpiresAtValue()
     {
-        $this->expires_at = $expiresAt;
-
-        return $this;
+        if(!$this->getExpiresAt()) {
+            $now = $this->getCreatedAt() ? $this->getCreatedAt()->format('U') : time();
+            $this->expires_at = new \DateTime(date('Y-m-d H:i:s', $now + 86400 * 30));
+        }
     }
 
     /**
@@ -490,5 +493,33 @@ class Job
     public function setUpdatedAtValue()
     {
         $this->updated_at = new \DateTime();
+    }
+
+    public function getCompanySlug()
+    {
+        return Joborad::slugify($this->getCompany());
+    }
+
+    public function getPositionSlug()
+    {
+        return Joborad::slugify($this->getPosition());
+    }
+
+    public function getLocationSlug()
+    {
+        return Joborad::slugify($this->getLocation());
+    }
+
+    /**
+     * Set expires_at
+     *
+     * @param \DateTime $expiresAt
+     * @return Job
+     */
+    public function setExpiresAt($expiresAt)
+    {
+        $this->expires_at = $expiresAt;
+
+        return $this;
     }
 }
