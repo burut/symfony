@@ -47,7 +47,7 @@ class LoadJobData extends AbstractFixture implements OrderedFixtureInterface
         $jobPartTime->setToken('designer_resume@example.com');
         $jobPartTime->setEmail('resume@example.com');
         $jobPartTime->setExpiresAt(new \DateTime('+30 days'));
-        $em->persist($jobExpired);
+//        $em->persist($jobExpired);
         $em->persist($jobPartTime);
         $em->flush();
     }
