@@ -47,7 +47,7 @@ class MiniTwitterController extends Controller
 
         $form->handleRequest($request);
 
-//        $twit->setMessage("");
+//        $twit->setMessage("");---------
 //        $twit->setImage("");
 
 //        if (!$form->isValid()) {

@@ -77,7 +77,7 @@ class Job
     private $email;
 
     /**
-     * @var \DateTime
+     * @var \DateTime(nullable=true)
      */
     private $expires_at;
 
