@@ -11,5 +11,5 @@ AppJoboardBundle_job:
     prefix: /job
 
 AppJoboardBundle_category:
-    pattern:   /category/{slug}/
-    defaults: { _controller: AppJoboardBundle:Category:show }
+    pattern: /category/{slug}/{page}
+    defaults: { _controller: AppJoboardBundle:Category:show, page: 1 }
