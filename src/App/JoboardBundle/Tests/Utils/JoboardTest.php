@@ -8,7 +8,7 @@ use App\JoboardBundle\Utils\Joboard;
 
 class JoboardTest extends \PHPUnit_Framework_TestCase
 {
-    public function testSlugify()
+    public function testSlugify($test)
     {
         if (empty($text)) {
             return 'n-a';
