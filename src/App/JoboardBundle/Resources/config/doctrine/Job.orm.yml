@@ -59,6 +59,12 @@ App\JoboardBundle\Entity\Job:
             joinColumn:
                 name: category_id
                 referencedColumnName: id
+#    lifecycleCallbacks:
+#        prePersist: [setCreatedAtValue]
+#        preUpdate: [setUpdatedAtValue]
     lifecycleCallbacks:
-        prePersist: [setCreatedAtValue]
-        preUpdate: [setUpdatedAtValue]
+            prePersist: [ preUpload, setCreatedAtValue, setExpiresAtValue ]
+            preUpdate: [ preUpload, setUpdatedAtValue ]
+            postPersist: [ upload ]
+            postUpdate: [ upload ]
+            postRemove: [ removeUpload ]

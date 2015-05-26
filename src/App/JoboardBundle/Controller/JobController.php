@@ -50,8 +50,8 @@ class JobController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity = new Job();
-        $form = $this->createCreateForm($entity);
+        $entity  = new Job();
+        $form = $this->createForm(new JobType(), $entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -59,13 +59,34 @@ class JobController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('app_job_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('app_job_show', array(
+                'company' => $entity->getCompanySlug(),
+                'location' => $entity->getLocationSlug(),
+                'id' => $entity->getId(),
+                'position' => $entity->getPositionSlug()
+            )));
         }
 
         return $this->render('AppJoboardBundle:Job:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+
+            $entity->file->move(__DIR__.'/../../../../web/uploads/jobs', $entity->file->getClientOriginalName());
+            $entity->setLogo($entity->file->getClientOriginalName());
+
+            $em->persist($entity);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('app_job_show', array(
+                'company' => $entity->getCompanySlug(),
+                'location' => $entity->getLocationSlug(),
+                'id' => $entity->getId(),
+                'position' => $entity->getPositionSlug()
+            )));
+        }
     }
 
     /**
