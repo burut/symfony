@@ -18,15 +18,15 @@ app_job_create:
     methods:  POST
 
 app_job_edit:
-    path:     /{id}/edit
+    pattern:  /{token}/edit
     defaults: { _controller: "AppJoboardBundle:Job:edit" }
 
 app_job_update:
-    path:     /{id}/update
+    pattern:  /{token}/update
     defaults: { _controller: "AppJoboardBundle:Job:update" }
-    methods:  [POST, PUT]
+    requirements: { _method: post|put }
 
 app_job_delete:
-    path:     /{id}/delete
+    pattern:  /{token}/delete
     defaults: { _controller: "AppJoboardBundle:Job:delete" }
-    methods:  [POST, DELETE]
+    requirements: { _method: post|delete }

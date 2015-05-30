@@ -63,7 +63,7 @@ App\JoboardBundle\Entity\Job:
 #        prePersist: [setCreatedAtValue]
 #        preUpdate: [setUpdatedAtValue]
     lifecycleCallbacks:
-            prePersist: [ preUpload, setCreatedAtValue, setExpiresAtValue ]
+            prePersist: [ setTokenValue, preUpload, setCreatedAtValue, setExpiresAtValue ]
             preUpdate: [ preUpload, setUpdatedAtValue ]
             postPersist: [ upload ]
             postUpdate: [ upload ]

@@ -50,7 +50,7 @@ class JobController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity  = new Job();
+        $entity = new Job();
         $form = $this->createForm(new JobType(), $entity);
         $form->handleRequest($request);
 
@@ -71,22 +71,6 @@ class JobController extends Controller
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-
-            $entity->file->move(__DIR__.'/../../../../web/uploads/jobs', $entity->file->getClientOriginalName());
-            $entity->setLogo($entity->file->getClientOriginalName());
-
-            $em->persist($entity);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('app_job_show', array(
-                'company' => $entity->getCompanySlug(),
-                'location' => $entity->getLocationSlug(),
-                'id' => $entity->getId(),
-                'position' => $entity->getPositionSlug()
-            )));
-        }
     }
 
     /**
@@ -103,8 +87,6 @@ class JobController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
-
         return $form;
     }
 
@@ -115,7 +97,11 @@ class JobController extends Controller
     public function newAction()
     {
         $entity = new Job();
-        $form   = $this->createCreateForm($entity);
+        $entity->setType('full-time');
+        $form = $this->createForm(new JobType(), $entity, [
+            'action' => $this->generateUrl('app_job_create'),
+            'method' => 'POST',
+        ]);
 
         return $this->render('AppJoboardBundle:Job:new.html.twig', array(
             'entity' => $entity,
@@ -148,18 +134,21 @@ class JobController extends Controller
      * Displays a form to edit an existing Job entity.
      *
      */
-    public function editAction($id)
+    public function editAction($token)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppJoboardBundle:Job')->find($id);
+        $entity = $em->getRepository('AppJoboardBundle:Job')->findOneByToken($token);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Job entity.');
+            throw $this->createNotFoundException('Такой вакансии не существует.');
         }
 
-        $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
+        $editForm = $this->createForm(new JobType(), $entity, [
+            'action' => $this->generateUrl('app_job_update', ['token' => $token]),
+            'method' => 'PUT',
+        ]);
+        $deleteForm = $this->createDeleteForm($token);
 
         return $this->render('AppJoboardBundle:Job:edit.html.twig', array(
             'entity'      => $entity,
@@ -182,32 +171,33 @@ class JobController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
-
         return $form;
     }
     /**
      * Edits an existing Job entity.
      *
      */
-    public function updateAction(Request $request, $id)
+    public function updateAction(Request $request, $token)
     {
         $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('AppJoboardBundle:Job')->find($id);
+        $entity = $em->getRepository('AppJoboardBundle:Job')->findOneByToken($token);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Job entity.');
+            throw $this->createNotFoundException('Такой вакансии не существует.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createEditForm($entity);
+        $editForm   = $this->createForm(new JobType(), $entity, [
+            'action' => $this->generateUrl('app_job_update', ['token' => $token]),
+            'method' => 'PUT'
+        ]);
+        $deleteForm = $this->createDeleteForm($token);
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+            $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('app_job_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('app_job_edit', array('token' => $token)));
         }
 
         return $this->render('AppJoboardBundle:Job:edit.html.twig', array(
@@ -220,17 +210,17 @@ class JobController extends Controller
      * Deletes a Job entity.
      *
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction(Request $request, $token)
     {
-        $form = $this->createDeleteForm($id);
+        $form = $this->createDeleteForm($token);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AppJoboardBundle:Job')->find($id);
+            $entity = $em->getRepository('AppJoboardBundle:Job')->findOneByToken($token);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Job entity.');
+                throw $this->createNotFoundException('Такой вакансии не существует.');
             }
 
             $em->remove($entity);
@@ -245,15 +235,13 @@ class JobController extends Controller
      *
      * @param mixed $id The entity id
      *
-     * @return \Symfony\Component\Form\Form The form
+     * @return Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm($id)
+    private function createDeleteForm($token)
     {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('app_job_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+        return $this->createFormBuilder(['token' => $token])
+            ->add('token', 'hidden')
             ->getForm()
-        ;
+            ;
     }
 }

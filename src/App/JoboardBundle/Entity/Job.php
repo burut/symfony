@@ -563,7 +563,10 @@ class Job
      */
     public function preUpload()
     {
-        // Add your code here
+        if (null !== $this->file) {
+            // Генерируем уникальное имя для файла
+            $this->logo = uniqid().'.'.$this->file->guessExtension();
+        }
     }
 
     /**
@@ -571,7 +574,14 @@ class Job
      */
     public function upload()
     {
-        // Add your code here
+        if (null === $this->file) {
+            return;
+        }
+
+        // Перемещаем файл в наш каталог web/uploads/job
+        $this->file->move($this->getUploadRootDir(), $this->logo);
+
+        unset($this->file);
     }
 
     /**
@@ -579,6 +589,20 @@ class Job
      */
     public function removeUpload()
     {
-        // Add your code here
+        if ($this->logo) {
+            if ($file = $this->getAbsolutePath()) {
+                unlink($file);
+            }
+        }
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setTokenValue()
+    {
+        if(!$this->getToken()) {
+            $this->token = sha1($this->getEmail().rand(11111, 99999));
+        }
     }
 }
