@@ -25,7 +25,10 @@
                 {% endif %}
 
                 {% if job.expiresSoon %}
-                    - <a href="">Продлить</a> ещё на 30 дней
+                    <form action="{{ path('app_job_extend', { 'token': job.token }) }}" method="post">
+                        {{ form_widget(extend_form) }}
+                        <button type="submit">Продлить</button> ещё на 30 дней
+                    </form>
                 {% endif %}
             </li>
         {% else %}

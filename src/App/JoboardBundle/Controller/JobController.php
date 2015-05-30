@@ -144,6 +144,10 @@ class JobController extends Controller
             throw $this->createNotFoundException('Такой вакансии не существует.');
         }
 
+        if ($entity->getIsActivated()) {
+            throw $this->createNotFoundException('Эта вакансия опубликована и не может быть отредактирована.');
+        }
+
         $editForm = $this->createForm(new JobType(), $entity, [
             'action' => $this->generateUrl('app_job_update', ['token' => $token]),
             'method' => 'PUT',
@@ -260,13 +264,15 @@ class JobController extends Controller
             throw $this->createNotFoundException('Такой вакансии не существует.');
         }
 
-        $deleteForm = $this->createDeleteForm($entity->getToken());
+        $deleteForm = $this->createDeleteForm($entity->getId());
         $publishForm = $this->createPublishForm($entity->getToken());
+        $extendForm = $this->createExtendForm($entity->getToken());
 
         return $this->render('AppJoboardBundle:Job:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
             'publish_form' => $publishForm->createView(),
+            'extend_form' => $extendForm->createView(),
         ));
     }
 
@@ -304,5 +310,44 @@ class JobController extends Controller
             ->add('token', 'hidden')
             ->getForm()
             ;
+    }
+
+    public function extendAction($token)
+    {
+        $form = $this->createExtendForm($token);
+        $request = $this->get('request');
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em=$this->getDoctrine()->getManager();
+            $entity = $em->getRepository('AppJoboardBundle:Job')->findOneByToken($token);
+
+            if (!$entity) {
+                throw $this->createNotFoundException('Такой вакансии не существует.');
+            }
+
+            if(!$entity->extend()){
+                throw $this->createNodFoundException('Невозможно пролдить вакансию');
+            }
+
+            $em->persist($entity);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add('notice', sprintf('Ваша вакансия продлена до %s', $entity->getExpiresAt()->format('m/d/Y')));
+        }
+
+        return $this->redirect($this->generateUrl('app_job_preview', [
+            'company'  => $entity->getCompanySlug(),
+            'location' => $entity->getLocationSlug(),
+            'token'    => $entity->getToken(),
+            'position' => $entity->getPositionSlug()
+        ]));
+    }
+
+    private function createExtendForm($token)
+    {
+        return $this->createFormBuilder(['token' => $token])
+            ->add('token', 'hidden')
+            ->getForm();
     }
 }

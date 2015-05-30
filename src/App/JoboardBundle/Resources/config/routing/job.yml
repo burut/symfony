@@ -47,3 +47,8 @@ app_job_publish:
     pattern:  /{token}/publish/
     defaults: { _controller: "AppJoboardBundle:Job:publish" }
     requirements: { _method: post, token: \w+ }
+
+app_job_extend:
+   pattern:  /{token}/extend/
+   defaults: { _controller: "AppJoboardBundle:Job:extend" }
+   requirements: { _method: post }
