@@ -580,7 +580,6 @@ class Job
 
         // Перемещаем файл в наш каталог web/uploads/job
         $this->file->move($this->getUploadRootDir(), $this->logo);
-
         unset($this->file);
     }
 
@@ -604,5 +603,25 @@ class Job
         if(!$this->getToken()) {
             $this->token = sha1($this->getEmail().rand(11111, 99999));
         }
+    }
+
+    public function isExpired()
+    {
+        return $this->getDaysBeforeExpires() < 0;
+    }
+
+    public function expiresSoon()
+    {
+        return $this->getDaysBeforeExpires() < 5;
+    }
+
+    public function getDaysBeforeExpires()
+    {
+        return ceil(($this->getExpiresAt()->format('U') - time()) / 86400);
+    }
+
+    public function publish()
+    {
+        $this->setIsActivated(true);
     }
 }

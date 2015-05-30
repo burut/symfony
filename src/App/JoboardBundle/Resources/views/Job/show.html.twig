@@ -6,6 +6,12 @@
 {% endblock %}
 
 {% block content %}
+    <div class="admin-panel">
+        {% if app.request.get('token') %}
+            {% include 'AppJoboardBundle:Job:admin.html.twig' with {'job': entity} %}
+        {% endif %}
+    </div>
+
     <div class="row">
         <div class="col-lg-9">
             <h3>{{ entity.company }}</h3>

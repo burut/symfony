@@ -59,10 +59,10 @@ class JobController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('app_job_show', array(
+            return $this->redirect($this->generateUrl('app_job_preview', array(
                 'company' => $entity->getCompanySlug(),
                 'location' => $entity->getLocationSlug(),
-                'id' => $entity->getId(),
+                'token' => $entity->getToken(),
                 'position' => $entity->getPositionSlug()
             )));
         }
@@ -197,7 +197,12 @@ class JobController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('app_job_edit', array('token' => $token)));
+            return $this->redirect($this->generateUrl('app_job_preview', array(
+                'company' => $entity->getCompanySlug(),
+                'location' => $entity->getLocationSlug(),
+                'token' => $entity->getToken(),
+                'position' => $entity->getPositionSlug()
+            )));
         }
 
         return $this->render('AppJoboardBundle:Job:edit.html.twig', array(
@@ -240,6 +245,62 @@ class JobController extends Controller
     private function createDeleteForm($token)
     {
         return $this->createFormBuilder(['token' => $token])
+            ->add('token', 'hidden')
+            ->getForm()
+            ;
+    }
+
+    public function previewAction($token)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('AppJoboardBundle:Job')->findOneByToken($token);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Такой вакансии не существует.');
+        }
+
+        $deleteForm = $this->createDeleteForm($entity->getToken());
+        $publishForm = $this->createPublishForm($entity->getToken());
+
+        return $this->render('AppJoboardBundle:Job:show.html.twig', array(
+            'entity'      => $entity,
+            'delete_form' => $deleteForm->createView(),
+            'publish_form' => $publishForm->createView(),
+        ));
+    }
+
+    public function publishAction(Request $request, $token)
+    {
+        $form = $this->createPublishForm($token);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $entity = $em->getRepository('AppJoboardBundle:Job')->findOneByToken($token);
+
+            if (!$entity) {
+                throw $this->createNotFoundException('Такой вакансии не существует.');
+            }
+
+            $entity->publish();
+            $em->persist($entity);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add('notice', 'Ваша вакансия опубликована на 30 дней.');
+        }
+
+        return $this->redirect($this->generateUrl('app_job_preview', array(
+            'company' => $entity->getCompanySlug(),
+            'location' => $entity->getLocationSlug(),
+            'token' => $entity->getToken(),
+            'position' => $entity->getPositionSlug()
+        )));
+    }
+
+    private function createPublishForm($token)
+    {
+        return $this->createFormBuilder(array('token' => $token))
             ->add('token', 'hidden')
             ->getForm()
             ;
