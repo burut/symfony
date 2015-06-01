@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>Joboard</title>
+    <subtitle>Последние вакансии</subtitle>
+    <link href="" rel="self"/>
+    <link href=""/>
+    <updated></updated>
+    <author><name>Joboard</name></author>
+    <id>Unique Id</id>
+
+    <entry>
+        <title>Название вакансии</title>
+        <link href="" />
+        <id>Идентификатор</id>
+        <updated></updated>
+        <summary>Описание</summary>
+        <author><name>Компания</name></author>
+    </entry>
+    <a href="{{ path('app_job', {'_format': 'atom'}) }}">RSS</a>
+</feed>

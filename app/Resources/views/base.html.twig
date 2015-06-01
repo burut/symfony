@@ -35,6 +35,11 @@
 </div>
 
 <div class="container">
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div>
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
     {% block content %}{% endblock %}
 </div>
 
@@ -43,6 +48,17 @@
     <a href="">RSS</a>
     <a href="">API</a>
     <a href="">Партнёрам</a>
+</div>
+
+<div id="job_history">
+    Последние просмотренные:
+    <ul>
+        {% for job in app.session.get('job_history') %}
+            <li>
+                <a href="{{ path('app_job_show', { 'id': job.id, 'company': job.companyslug, 'location': job.locationslug, 'position': job.positionslug }) }}">{{ job.position }} - {{ job.company }}</a>
+            </li>
+        {% endfor %}
+    </ul>
 </div>
 
 {% block javascripts %}

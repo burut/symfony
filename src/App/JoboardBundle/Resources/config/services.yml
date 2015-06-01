@@ -1,4 +1,20 @@
+# src/App/JoboardBundle/Resources/config/services.yml
+
 services:
-#    app_joboard.example:
-#        class: App\JoboardBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+   app.joboard.admin.category:
+       class: App\JoboardBundle\Admin\CategoryAdmin
+       tags:
+           - { name: sonata.admin, manager_type: orm, group: joboard, label: "Категории" }
+       arguments:
+           - ~
+           - App\JoboardBundle\Entity\Category
+           - 'AppJoboardBundle:CategoryAdmin'
+
+   app.joboard.admin.job:
+       class: App\JoboardBundle\Admin\JobAdmin
+       tags:
+           - { name: sonata.admin, manager_type: orm, group: joboard, label: "Вакансии" }
+       arguments:
+           - ~
+           - App\JoboardBundle\Entity\Job
+           - 'AppJoboardBundle:JobAdmin'

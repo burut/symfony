@@ -118,8 +118,31 @@ class JobController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AppJoboardBundle:Job')->getActiveJob($id);
+
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Job entity.');
+        }
+
+        $session = $this->get('session');
+
+        // получить вакансии, которые уже есть в истории
+        $jobs = $session->get('job_history', []);
+
+        $job = [
+            'id' => $entity->getId(),
+            'position' =>$entity->getPosition(),
+            'company' => $entity->getCompany(),
+            'companyslug' => $entity->getCompanySlug(),
+            'locationslug' => $entity->getLocationSlug(),
+            'positionslug' => $entity->getPositionSlug()
+        ];
+
+        if (!in_array($job, $jobs)) {
+            // добавить текущую вакансию в начало массива
+            array_unshift($jobs, $job);
+
+            // обновить истории посещений
+            $session->set('job_history', array_slice($jobs, 0, 3));
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -350,4 +373,6 @@ class JobController extends Controller
             ->add('token', 'hidden')
             ->getForm();
     }
+
+
 }
