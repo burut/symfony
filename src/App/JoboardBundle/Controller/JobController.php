@@ -39,9 +39,24 @@ class JobController extends Controller
             }
         }
 
-        return $this->render('AppJoboardBundle:Job:index.html.twig', array(
-            'categories' => $categories
-        ));
+        $latestJob = $em->getRepository('AppJoboardBundle:Job')->getLatestPost();
+
+        if($latestJob) {
+            $lastUpdated = $latestJob->getCreatedAt()->format(DATE_ATOM);
+        } else {
+            $lastUpdated = new \DateTime();
+            $lastUpdated = $lastUpdated->format(DATE_ATOM);
+        }
+
+        $format = $this->getRequest()->getRequestFormat();
+
+        return $this->render(
+            'AppJoboardBundle:Job:index.'.$format.'.twig',
+            [
+                'categories'  => $categories,
+                'lastUpdated' => $lastUpdated,
+                'feedId'      => sha1($this->generateUrl('app_job', ['_format'=> 'atom'], true))
+            ]);
     }
 
     /**

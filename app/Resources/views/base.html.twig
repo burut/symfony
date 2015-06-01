@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="{{ asset('bundles/appjoboard/css/main.css') }}" type="text/css" media="all">
     {% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <link rel="alternate" type="application/atom+xml" title="Последнии вакансии" href="{{ url('app_job', {'_format': 'atom'}) }}">
 </head>
 <body>
 <a href="{{ path('app_job_new') }}">Добавить вакансию</a>
@@ -45,7 +46,7 @@
 
 <div id="footer" class="container">
     <a href="">О проекте</a>
-    <a href="">RSS</a>
+    <a href="{{ path('app_job', {'_format': 'atom'}) }}">RSS</a>
     <a href="">API</a>
     <a href="">Партнёрам</a>
 </div>

@@ -92,4 +92,28 @@ class JobRepository extends EntityRepository
 
         return $query->execute();
     }
+
+    public function getLatestPost($categoryId = null)
+    {
+        $query = $this->createQueryBuilder('j')
+            ->where('j.expires_at > :date')
+            ->setParameter('date', date('Y-m-d H:i:s', time()))
+            ->andWhere('j.is_activated = :activated')
+            ->setParameter('activated', 1)
+            ->orderBy('j.expires_at', 'DESC')
+            ->setMaxResults(1);
+
+        if($categoryId) {
+            $query->andWhere('j.category = :category_id')
+                ->setParameter('category_id', $categoryId);
+        }
+
+        try{
+            $job = $query->getQuery()->getSingleResult();
+        } catch(\Doctrine\Orm\NoResultException $e){
+            $job = null;
+        }
+
+        return $job;
+    }
 }

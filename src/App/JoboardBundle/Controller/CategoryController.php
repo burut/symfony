@@ -33,13 +33,26 @@ class CategoryController extends Controller
 
         $category->setActiveJobs($activeJobs);
 
-        return $this->render('AppJoboardBundle:Category:show.html.twig', array(
+        $latestJob = $em->getRepository('AppJoboardBundle:Job')->getLatestPost($category->getId());
+
+        if($latestJob) {
+            $lastUpdated = $latestJob->getCreatedAt()->format(DATE_ATOM);
+        } else {
+            $lastUpdated = new \DateTime();
+            $lastUpdated = $lastUpdated->format(DATE_ATOM);
+        }
+
+        $format = $this->getRequest()->getRequestFormat();
+
+        return $this->render('AppJoboardBundle:Category:show.'.$format.'.twig', [
             'category'     => $category,
             'lastPage'     => $lastPage,
             'previousPage' => $previousPage,
             'currentPage'  => $page,
             'nextPage'     => $nextPage,
-            'totalJobs'    => $totalJobs
-        ));
+            'totalJobs'    => $totalJobs,
+            'feedId'       => sha1($this->generateUrl('AppJoboardBundle_category', ['slug' => $category->getSlug(), 'format' => 'atom'], true)),
+            'lastUpdated' => $lastUpdated
+        ]);
     }
 }
