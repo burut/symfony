@@ -23,3 +23,13 @@ AppJoboardBundle_job:
 AppJoboardBundle_category:
     pattern: /category/{slug}/{page}
     defaults: { _controller: AppJoboardBundle:Category:show, page: 1 }
+
+AppJoboardBundle_api:
+   pattern: /api/{token}/jobs.{_format}
+   defaults: {_controller: "AppJoboardBundle:Api:list"}
+   requirements:
+       _format: xml|json|yaml
+
+AppJoboardBundle_app_affiliate:
+   resource: "@AppJoboardBundle/Resources/config/routing/affiliate.yml"
+   prefix:   /affiliate

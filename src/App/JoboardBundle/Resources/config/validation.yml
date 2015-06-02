@@ -26,3 +26,13 @@ App\JoboardBundle\Entity\Job:
             - Url: ~
         file:
             - Image: ~
+
+App\JoboardBundle\Entity\Affiliate:
+   constraints:
+       - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: email
+   properties:
+       url:
+           - Url: ~
+       email:
+           - NotBlank: ~
+           - Email: ~
